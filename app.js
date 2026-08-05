@@ -11,8 +11,18 @@ heading.textContent = "Reel-A-Recipe";
 const form = document.querySelector("#recipe-form");
 const input = document.querySelector("#recipe-input");
 
+const list = document.querySelector("#recipe-list");
+
+function addRecipe(name) {
+    const item = document.createElement("li");
+    item.textContent = name;
+    list.appendChild(item);
+}
+
+
 // When the form is submitted, run this function.
 form.addEventListener("submit", function (event) {
   event.preventDefault();
-  console.log("New recipe:", input.value);
+  addRecipe(input.value);
+  input.value = "";
 });

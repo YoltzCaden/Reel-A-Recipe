@@ -136,12 +136,26 @@
 - last-reviewed: 2026-08-05
 - evidence: opened the Elements/Inspector panel for the first time (guided), found their own `<input>` in the live DOM, and read its attributes back accurately — including noticing which of two stray commas survived and which had vanished, a detail sharp enough that it corrected my own expectation. Took the point that a page can render fine and still be wrong, and that the Inspector is how you tell
 
+## dom-create-append
+- status: practicing
+- depends-on: dom
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: correctly predicted that `document.createElement("li")` plus a textContent assignment would change nothing on the page — the element exists in memory, attached to nothing. Then correctly predicted that `appendChild` would place it at the bottom of the list. Wrote all three steps (create, fill, append) into their own function afterwards with no example to copy
+
+## js-type-coercion
+- status: introduced
+- depends-on: javascript
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: passed the `input` element where `input.value` was needed, correctly said "it won't show the value, that's all i know" rather than guessing, then ran it and saw `[object HTMLInputElement]` land in the list. Met the rule that `[object Something]` in the UI means an object was passed where text was expected. Has not yet met coercion in any other form (string/number, truthiness)
+
 ## js-undefined
 - status: introduced
 - depends-on: javascript
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: deliberately misspelled `input.value` as `input.valu` and predicted it would throw an error. It logged `undefined` instead. Met the distinction between a misspelled property (silent `undefined`) and a misspelled variable (loud `ReferenceError`), but has only seen the first of those two failures happen
+- evidence: deliberately misspelled `input.value` as `input.valu` and predicted it would throw an error. It logged `undefined` instead. Met the distinction between a misspelled property (silent `undefined`) and a misspelled variable (loud `ReferenceError`), but has only seen the first of those two failures happen. Same day: met the *other* undefined — a function with no `return` — and explained it correctly and unprompted. Holds the distinction that `undefined` is only a bug when a value was expected
 
 ## git-remotes
 - status: practicing
@@ -162,7 +176,7 @@
 - depends-on: html-structure
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: added `id="pantry-heading"` to a specific <h2> from a shown example, then used that id to address that one element from JavaScript. Understood the purpose — naming one element so it can be picked out from among identical siblings. 2026-08-05 (later): wrote three attributes onto one `<input>` tag from a spec, but separated them with commas (a JavaScript/Python carry-over). Correctly spotted the difference when pointed at their own working `<link>` tag ("the link tag is space separated, the input tag is comma separated") but drew the wrong conclusion about which was correct, and needed to be told. Then predicted the browser would discard the stray commas; inspected the live DOM and found one had become an attribute literally named `,`. Fixed it and verified in the Inspector
+- evidence: added `id="pantry-heading"` to a specific <h2> from a shown example, then used that id to address that one element from JavaScript. Understood the purpose — naming one element so it can be picked out from among identical siblings. 2026-08-05 (later): wrote three attributes onto one `<input>` tag from a spec, but separated them with commas (a JavaScript/Python carry-over). Correctly spotted the difference when pointed at their own working `<link>` tag ("the link tag is space separated, the input tag is comma separated") but drew the wrong conclusion about which was correct, and needed to be told. Then predicted the browser would discard the stray commas; inspected the live DOM and found one had become an attribute literally named `,`. Fixed it and verified in the Inspector. 2026-08-05 (later): put `id="recipe-list"` on a closing `</ul>` tag as well as the opening one, then reasoned out why that's meaningless when asked what a closing tag's job is ("the /ul tag closes the list wrapper"). Also ended up with the same id on two different `<ul>` elements; when shown, stated both rules correctly without help — ids must be unique, and querySelector returns the first match
 
 ## event-listeners
 - status: practicing
@@ -172,11 +186,11 @@
 - evidence: wrote the body of a submit listener themselves (the console.log line, then `event.preventDefault();`), and placed preventDefault first in the body unprompted. Correctly predicted the pre-preventDefault behaviour ("it will log Form Submitted! then the page reloads") and watched the log flash and vanish with the reload. Then correctly predicted all three consequences of preventDefault — log stays, no reload, typed text stays in the box. Has not yet written an `addEventListener` call from scratch; the call and its `function (event)` wrapper were given
 
 ## js-functions
-- status: introduced
+- status: practicing
 - depends-on: javascript
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: met an anonymous function passed as an argument to addEventListener, and the idea that you hand a function over for the browser to call later rather than calling it yourself. Wrote statements inside the function body correctly, including using the `event` parameter. Has NOT yet written a function of their own, named or anonymous, and has not explained "a function as a value" in their own words — the wrapper was given to them both times. Check this before relying on it
+- evidence: met an anonymous function passed as an argument to addEventListener, and the idea that you hand a function over for the browser to call later rather than calling it yourself. Wrote statements inside the function body correctly, including using the `event` parameter. Debt paid the same day: wrote their first complete function unaided — `addRecipe(name)` with a correct declaration, one parameter, and a three-line body — from a written spec and a neutral `greet()` example, with no example of this function to copy. Called it from the console with a correct prediction of the result. When the console printed `undefined` after the call, reasoned it out themselves: "it doesn't return anything so it evaluates to undefined". Still has not written a function that *returns* a value
 
 ## forms
 - status: practicing
@@ -316,7 +330,7 @@
 - depends-on: forms
 - introduced: —
 - last-reviewed: —
-- evidence: —
+- evidence: — (parked deliberately on 2026-08-05: submitting the empty form currently adds a blank list item. Named out loud as a known gap, comes due in Section 7)
 
 ## error-handling
 - status: seed
