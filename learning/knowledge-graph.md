@@ -185,6 +185,27 @@
 - last-reviewed: 2026-08-05
 - evidence: noticed unprompted, mid-lesson, that six commits had never been pushed and asked why. Correctly predicted both halves of `git push` — that the six commits would go to GitHub and that the uncommitted `app.js` edit would stay local. Ran the push. Also asked whether pushing was in the plan, which it was not until Section 8; the concept was pulled forward on their own initiative
 
+## html-error-recovery
+- status: practicing
+- depends-on: html-structure
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: third encounter with malformed HTML that still worked — stray commas became an invented attribute, an id on a closing tag was discarded, and `type="sumbit"` fell back to "submit". Predicted the button typo would break the form ("it won't work but i'm not too sure"), tested it, and found it worked. Formed their own hypothesis about which mechanism was responsible — the input rather than the button — which turned out to be correct for the Enter case. Holds the contrast: HTML guesses and carries on, JavaScript stops dead
+
+## refactoring
+- status: practicing
+- depends-on: js-functions
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: spotted the duplication between addRecipe and addPantry themselves, then went away and did the refactor unprompted between lessons. The target shape — `addItem(name, list)` — was shown to them in chat, but the edit was entirely theirs. Changed the definition without updating the four call sites; when asked to predict, said "it will throw a ReferenceError and nothing will render", which was exactly right, then fixed all four. Took the point that a refactor must preserve behaviour, and verified by exercising both forms by hand
+
+## js-naming-conventions
+- status: practicing
+- depends-on: js-variables
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: renamed `form`/`input`/`list` to `recipeForm`/`recipeInput`/`recipeList` on their own initiative once a second set existed, correctly reasoning that bare names were now ambiguous. Did it first in snake_case; once told JavaScript uses camelCase, converted all twelve occurrences across declarations and uses with no stragglers left behind
+
 ## js-variables
 - status: introduced
 - depends-on: javascript
@@ -211,14 +232,14 @@
 - depends-on: javascript
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: met an anonymous function passed as an argument to addEventListener, and the idea that you hand a function over for the browser to call later rather than calling it yourself. Wrote statements inside the function body correctly, including using the `event` parameter. Debt paid the same day: wrote their first complete function unaided — `addRecipe(name)` with a correct declaration, one parameter, and a three-line body — from a written spec and a neutral `greet()` example, with no example of this function to copy. Called it from the console with a correct prediction of the result. When the console printed `undefined` after the call, reasoned it out themselves: "it doesn't return anything so it evaluates to undefined". Still has not written a function that *returns* a value
+- evidence: met an anonymous function passed as an argument to addEventListener, and the idea that you hand a function over for the browser to call later rather than calling it yourself. Wrote statements inside the function body correctly, including using the `event` parameter. Debt paid the same day: wrote their first complete function unaided — `addRecipe(name)` with a correct declaration, one parameter, and a three-line body — from a written spec and a neutral `greet()` example, with no example of this function to copy. Called it from the console with a correct prediction of the result. When the console printed `undefined` after the call, reasoned it out themselves: "it doesn't return anything so it evaluates to undefined". Still has not written a function that *returns* a value. 2026-08-05 (later): wrote a second function, `addPantry`, from memory with no spec beyond "repeat the pattern". Then spotted unprompted that it and `addRecipe` differ only in which list they append to, and said "this could become one function" — reaching for an `if` to distinguish them rather than a parameter, which is the right instinct via a costlier route. Refactor parked in plan.md
 
 ## forms
 - status: practicing
 - depends-on: html-structure
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: wrote the `<input>` and `<button type="submit">Add Recipe</button>` from a written spec with no example markup to copy, and got the void-element rule right (no `</input>`). Predicted "nothing will happen" on clicking the submit button with zero JS wired up; ran it and reported the real result accurately — page reloaded, typed text gone, `?` appended to the URL. 2026-08-05 (later): stopped that default behaviour with `event.preventDefault()`, and learned that a text box's typed content lives in `.value`, not `.textContent` — ran `input.textContent` in the console, got an empty string, and connected it back to `<input>` being a void element with no inside to read
+- evidence: wrote the `<input>` and `<button type="submit">Add Recipe</button>` from a written spec with no example markup to copy, and got the void-element rule right (no `</input>`). Predicted "nothing will happen" on clicking the submit button with zero JS wired up; ran it and reported the real result accurately — page reloaded, typed text gone, `?` appended to the URL. 2026-08-05 (later): stopped that default behaviour with `event.preventDefault()`, and learned that a text box's typed content lives in `.value`, not `.textContent` — ran `input.textContent` in the console, got an empty string, and connected it back to `<input>` being a void element with no inside to read. 2026-08-05 (later): built a second complete form from a written spec with no skeleton — form, input, submit button, correct ids — and wired it up end to end. Also met two ways a form submits: implicit submission (Enter in a single-input form, which they hypothesised themselves) and a submit button. Learned that an invalid `type` on a `<button>` falls back to "submit"
 
 ## js-objects-arrays
 - status: practicing
@@ -393,7 +414,7 @@
 - depends-on: none
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: located where a script stopped executing by reasoning about which effects had and hadn't happened, rather than by reading the stack trace. That is real debugging reasoning, but it was a break I set up deliberately with a prediction asked for in advance — they have not yet diagnosed a bug they didn't know was coming. See [[js-runtime-errors]]
+- evidence: located where a script stopped executing by reasoning about which effects had and hadn't happened, rather than by reading the stack trace. That is real debugging reasoning, but it was a break I set up deliberately with a prediction asked for in advance — they have not yet diagnosed a bug they didn't know was coming. See [[js-runtime-errors]]. 2026-08-05 (later): predicted the exact failure of their own half-finished rename before running it, and learned that four broken call sites produce one error at a time because the script halts at the first — so "fix, refresh, repeat" is the expected workflow, not a sign of going in circles
 
 ## ui-polish
 - status: seed

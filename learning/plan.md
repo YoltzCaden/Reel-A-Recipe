@@ -18,7 +18,7 @@
 - [x] Create and link a CSS file, add basic styling
 - [x] Commit the page to git
 
-### 2. Making it interactive  [ ] not started
+### 2. Making it interactive  [x] complete
 **Deliverable:** Add a recipe or pantry item through a form and see it appear on the page instantly (no saving yet — gone on refresh).
 **Concepts:** dom, event-listeners, js-functions, forms, js-objects-arrays
 
@@ -28,7 +28,10 @@
 - [x] Listen for the form's submit event and log what was typed
 - [x] Write a function that adds the typed recipe to the page as a new list item
 - [x] Move the recipes into a JavaScript array and build the list from that array
-- [ ] Repeat the whole pattern for the pantry form, from memory
+- [x] Repeat the whole pattern for the pantry form, from memory
+
+- [x] Refactor `addRecipe`/`addPantry` into one `addItem(name, list)` — unplanned,
+  done on their own initiative immediately after spotting the duplication
 
 ### 3. A simple local server  [ ] not started
 **Deliverable:** A running Express server that responds when you visit it locally.
