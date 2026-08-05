@@ -1,0 +1,20 @@
+{
+  "name": "reel-a-recipe",
+  "version": "1.0.0",
+  "description": "An app that helps you find the recipe you need from the ingredients you already have!",
+  "homepage": "https://github.com/YoltzCaden/Reel-A-Recipe#readme",
+  "bugs": {
+    "url": "https://github.com/YoltzCaden/Reel-A-Recipe/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YoltzCaden/Reel-A-Recipe.git"
+  },
+  "license": "ISC",
+  "author": "Caden Fernandes",
+  "type": "commonjs",
+  "main": "server.js",  
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

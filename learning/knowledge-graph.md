@@ -64,7 +64,7 @@
 - depends-on: javascript
 - introduced: 2026-08-04
 - last-reviewed: 2026-08-05
-- evidence: asked to clarify vs Express; correctly restated "Node.js runs the JavaScript". 2026-08-05: asked what would stop `app.js` running in the terminal, answered unprompted and correctly with the mechanism, not the symptom — "there is no document to grab an object h1... app.js requires a document to run on". Correctly predicted `node --version` would report command-not-found from their own memory of never installing it, installed Node 24 on Fedora themselves, then ran a JS file from the terminal and correctly predicted its output would land in the terminal rather than DevTools. Holds the split: the language runs anywhere, `document` is the browser's
+- evidence: asked to clarify vs Express; correctly restated "Node.js runs the JavaScript". 2026-08-05: asked what would stop `app.js` running in the terminal, answered unprompted and correctly with the mechanism, not the symptom — "there is no document to grab an object h1... app.js requires a document to run on". Correctly predicted `node --version` would report command-not-found from their own memory of never installing it, installed Node 24 on Fedora themselves, then ran a JS file from the terminal and correctly predicted its output would land in the terminal rather than DevTools. Holds the split: the language runs anywhere, `document` is the browser's. 2026-08-06: ran `node index.html` after correctly predicting a SyntaxError, and met the rule that Node reads every file handed to it as JavaScript regardless of extension → [[syntax-vs-runtime-errors]]
 
 ## express
 - status: introduced
@@ -183,14 +183,14 @@
 - depends-on: nodejs, frontend-ui, backend-logic
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: asked whether `server.js` will be able to call `document.querySelector`, answered "yes, because the server will serve the html document for app.js to work on" — the classic conflation of *sending* a document with *having* one. Given a scaffold about timing and location (Node runs server.js possibly for hours before any visitor; the browser builds the DOM from the text it receives, on the visitor's machine), corrected it themselves: "it exists on my laptop and the server cannot reach it". The correction was guided, not independent — re-check this before Section 4, where it's load-bearing
+- evidence: asked whether `server.js` will be able to call `document.querySelector`, answered "yes, because the server will serve the html document for app.js to work on" — the classic conflation of *sending* a document with *having* one. Given a scaffold about timing and location (Node runs server.js possibly for hours before any visitor; the browser builds the DOM from the text it receives, on the visitor's machine), corrected it themselves: "it exists on my laptop and the server cannot reach it". The correction was guided, not independent — re-check this before Section 4, where it's load-bearing. 2026-08-06 re-check, and it did not hold clean: asked whether npm's guess of `"main": "app.js"` was right, said "Yes. If node tries to run it there will be a ReferenceError" — holding the correct fact and the wrong conclusion in one sentence. Shown the contradiction, picked the right half without further help ("the yes gives, main should not be app.js"). Then answered `index.html` instead — reasoning from what starts the app *for a user* rather than what Node can execute. Only settled it by running `node index.html` themselves and seeing the SyntaxError, having predicted it correctly. The distinction now has a hard experiment behind it rather than an analogy, but two wrong answers on the way means it is still not automatic — keep watching it through Section 4
 
 ## package-managers
 - status: introduced
 - depends-on: none
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: asked to install two named packages, correctly predicted dnf would list more than two — "since they will have dependencies" — and saw seven. Read the transaction summary with help: noticed `nodejs24-bin` is 154 KiB while the real engine `nodejs24-libs` is 62.8 MiB, and met "weak dependencies" as optional extras. Also met the `[y/N]` capital-letter-is-the-default convention. Comes due again immediately in [[npm-package-json]], where npm does the same job for JavaScript libraries
+- evidence: asked to install two named packages, correctly predicted dnf would list more than two — "since they will have dependencies" — and saw seven. Read the transaction summary with help: noticed `nodejs24-bin` is 154 KiB while the real engine `nodejs24-libs` is 62.8 MiB, and met "weak dependencies" as optional extras. Also met the `[y/N]` capital-letter-is-the-default convention. Comes due again immediately in [[npm-package-json]], where npm does the same job for JavaScript libraries. 2026-08-06: met the second package manager, npm, and correctly deduced from memory of the dnf transaction that it had already arrived alongside Node. Met the scope distinction — dnf manages software for the whole machine, npm manages libraries for one project folder. Still `introduced` rather than `practicing`: has run `npm init` but has not yet installed a package with npm, which is the next task
 
 ## js-undefined
 - status: introduced
@@ -277,11 +277,18 @@
 - evidence: wrote a second ul/li list from memory with no example shown, found her own missing </ul> by comparing to working code, and correctly predicted the browser would render fine anyway due to error recovery ("only problem would be if any code written after it")
 
 ## npm-package-json
-- status: seed
-- depends-on: nodejs
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- status: practicing
+- depends-on: nodejs, package-managers
+- introduced: 2026-08-06
+- last-reviewed: 2026-08-06
+- evidence: predicted `npm --version` would report a version *before* running it, and gave real evidence rather than a guess — recalled the package name `nodejs24-npm-bin` scrolling past in the previous day's dnf transaction. Ran `npm init` and accepted the defaults. Predicted the resulting file would be "filled with dependencies installed"; on seeing no `dependencies` key at all, immediately gave the correct reason unprompted — "because I haven't installed any". Wrote their own one-sentence `description` replacing the markdown npm had scraped out of README.md. Got `main` wrong twice before getting it right (see [[client-vs-server]]), which is where the real learning was. Has not yet run `npm install` — that is the next task
+
+## syntax-vs-runtime-errors
+- status: practicing
+- depends-on: js-runtime-errors
+- introduced: 2026-08-06
+- last-reviewed: 2026-08-06
+- evidence: met the split by running their own two files through Node — `app.js` parsed fine and died at `document` with a ReferenceError (failed *while running*), `index.html` never parsed at all and died with a SyntaxError (failed *while reading*). Predicted the `index.html` SyntaxError before running it. Then transferred the distinction unaided to a third case: asked whether a missing comma in package.json would fail like the ReferenceError or the SyntaxError, chose SyntaxError with the correct reason — "because the file cannot be read". Also worked out unprompted why a parse error names the line *after* the mistake ("it kept reading until it found something wrong"), and met the rule: a parser reports where it noticed, not where you erred — when the flagged line looks fine, check the line above → [[json]], [[stack-traces]]
 
 ## express-routes
 - status: seed
@@ -312,11 +319,11 @@
 - evidence: —
 
 ## json
-- status: seed
+- status: practicing
 - depends-on: none
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- introduced: 2026-08-06
+- last-reviewed: 2026-08-06
+- evidence: first contact via package.json, pulled forward from Section 4. Hand-edited two values in a real JSON file without breaking it, then broke it deliberately: removed one comma and correctly predicted the failure would be a SyntaxError "because the file cannot be read" — choosing parse-time over run-time for the right reason, unprompted. Read the resulting EJSONPARSE error and worked out on their own why it names line 17 when the comma was deleted from line 16 ("it kept reading until it found something wrong"). Met the rule that a parser reports where it *noticed*, not where you erred. Met that JSON has no comments. Has only met JSON as a config file on disk — not yet as data sent over a network, which is where it comes due in Section 4 → [[fetch-api]]
 
 ## async-await
 - status: seed
@@ -435,7 +442,7 @@
 - depends-on: none
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: located where a script stopped executing by reasoning about which effects had and hadn't happened, rather than by reading the stack trace. That is real debugging reasoning, but it was a break I set up deliberately with a prediction asked for in advance — they have not yet diagnosed a bug they didn't know was coming. See [[js-runtime-errors]]. 2026-08-05 (later): predicted the exact failure of their own half-finished rename before running it, and learned that four broken call sites produce one error at a time because the script halts at the first — so "fix, refresh, repeat" is the expected workflow, not a sign of going in circles
+- evidence: located where a script stopped executing by reasoning about which effects had and hadn't happened, rather than by reading the stack trace. That is real debugging reasoning, but it was a break I set up deliberately with a prediction asked for in advance — they have not yet diagnosed a bug they didn't know was coming. See [[js-runtime-errors]]. 2026-08-05 (later): predicted the exact failure of their own half-finished rename before running it, and learned that four broken call sites produce one error at a time because the script halts at the first — so "fix, refresh, repeat" is the expected workflow, not a sign of going in circles. 2026-08-06: read an npm EJSONPARSE error they had not seen before and located the real cause a line above where the error pointed, reasoning it out rather than being told → [[syntax-vs-runtime-errors]]
 
 ## ui-polish
 - status: seed
