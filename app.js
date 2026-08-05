@@ -13,16 +13,23 @@ const input = document.querySelector("#recipe-input");
 
 const list = document.querySelector("#recipe-list");
 
+const recipes = ["Egg Fried Rice", "Mince on Bread", "Chicken Stir Fry"];
+
 function addRecipe(name) {
     const item = document.createElement("li");
     item.textContent = name;
     list.appendChild(item);
 }
 
+for (const recipe of recipes) {
+    addRecipe(recipe);
+}
+
 
 // When the form is submitted, run this function.
 form.addEventListener("submit", function (event) {
   event.preventDefault();
+  recipes.push(input.value);
   addRecipe(input.value);
   input.value = "";
 });

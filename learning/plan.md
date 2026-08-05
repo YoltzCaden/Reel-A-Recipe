@@ -27,7 +27,7 @@
 - [x] Add an HTML form with a text box and an "Add recipe" button (it won't do anything yet)
 - [x] Listen for the form's submit event and log what was typed
 - [x] Write a function that adds the typed recipe to the page as a new list item
-- [ ] Move the recipes into a JavaScript array and build the list from that array
+- [x] Move the recipes into a JavaScript array and build the list from that array
 - [ ] Repeat the whole pattern for the pantry form, from memory
 
 ### 3. A simple local server  [ ] not started

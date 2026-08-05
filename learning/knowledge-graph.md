@@ -150,6 +150,27 @@
 - last-reviewed: 2026-08-05
 - evidence: passed the `input` element where `input.value` was needed, correctly said "it won't show the value, that's all i know" rather than guessing, then ran it and saw `[object HTMLInputElement]` land in the list. Met the rule that `[object Something]` in the UI means an object was passed where text was expected. Has not yet met coercion in any other form (string/number, truthiness)
 
+## js-loops
+- status: practicing
+- depends-on: js-objects-arrays
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: wrote a `for...of` loop over `recipes` calling addRecipe for each item, from a neutral `for (const colour of colours)` example and a written spec — correct syntax and correct body first time. Has only met `for...of`; classic index-counting `for` loops and array methods like forEach/map not yet introduced
+
+## data-driven-rendering
+- status: practicing
+- depends-on: js-objects-arrays, dom-create-append
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: correctly predicted that adding the loop while the `<li>` tags were still hardcoded would render six recipes, each duplicated — the concrete cost of the same data living in two places. After emptying the `<ul>`, took the point that index.html now contains no recipes at all and the page is built from the array. Spotted unprompted that a pushed recipe vanishes on refresh, and connected it to the array being rebuilt from app.js on every load
+
+## js-runtime-errors
+- status: practicing
+- depends-on: javascript
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: deliberately misspelled `recipes` as `recipess` in the loop and correctly predicted a loud ReferenceError plus a dead page — both the list and the form stopped working. Then, asked what the `<h1>` said, answered "it says Reel-A-Recipe so the script stopped at the loop", deducing from what still worked exactly where execution halted. Holds the rule that an uncaught error stops the script at that line, so several simultaneous failures usually mean one error near the top
+
 ## js-undefined
 - status: introduced
 - depends-on: javascript
@@ -200,11 +221,11 @@
 - evidence: wrote the `<input>` and `<button type="submit">Add Recipe</button>` from a written spec with no example markup to copy, and got the void-element rule right (no `</input>`). Predicted "nothing will happen" on clicking the submit button with zero JS wired up; ran it and reported the real result accurately — page reloaded, typed text gone, `?` appended to the URL. 2026-08-05 (later): stopped that default behaviour with `event.preventDefault()`, and learned that a text box's typed content lives in `.value`, not `.textContent` — ran `input.textContent` in the console, got an empty string, and connected it back to `<input>` being a void element with no inside to read
 
 ## js-objects-arrays
-- status: seed
+- status: practicing
 - depends-on: javascript
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: correctly predicted `testList[1]` returns "b", showing they already had zero-indexing. Wrote `const recipes = [...]` as an array literal unaided. Reasoned out unprompted that a recipe added through the form would NOT be in the array, and gave the right reason — addRecipe only touches the page. Wrote `recipes.push(input.value)` from the method name alone, and correctly predicted the console would show four items afterwards. Has only met arrays of strings; objects not yet introduced despite the concept name
 
 ## html-lists
 - status: understood
@@ -368,11 +389,11 @@
 - evidence: —
 
 ## bug-fixing
-- status: seed
+- status: introduced
 - depends-on: none
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: located where a script stopped executing by reasoning about which effects had and hadn't happened, rather than by reading the stack trace. That is real debugging reasoning, but it was a break I set up deliberately with a prediction asked for in advance — they have not yet diagnosed a bug they didn't know was coming. See [[js-runtime-errors]]
 
 ## ui-polish
 - status: seed
