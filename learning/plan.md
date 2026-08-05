@@ -25,7 +25,7 @@
 - [x] Create `app.js`, link it from `index.html`, and prove it runs in the browser console
 - [x] Reach into the page from JavaScript and change some text on it (the DOM)
 - [x] Add an HTML form with a text box and an "Add recipe" button (it won't do anything yet)
-- [ ] Listen for the form's submit event and log what was typed
+- [x] Listen for the form's submit event and log what was typed
 - [ ] Write a function that adds the typed recipe to the page as a new list item
 - [ ] Move the recipes into a JavaScript array and build the list from that array
 - [ ] Repeat the whole pattern for the pantry form, from memory

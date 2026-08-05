@@ -6,3 +6,13 @@ console.log("Hello");
 const heading = document.querySelector("h1");
 
 heading.textContent = "Reel-A-Recipe";
+
+// Hold onto the form and the text box inside it.
+const form = document.querySelector("#recipe-form");
+const input = document.querySelector("#recipe-input");
+
+// When the form is submitted, run this function.
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  console.log("New recipe:", input.value);
+});

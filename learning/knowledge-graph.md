@@ -8,7 +8,7 @@
 - depends-on: none
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: correctly predicted git status output before running it, correctly distinguished tracked/modified vs untracked files, reasoned that README/learning/.claude deserved separate commits rather than being bundled with the page files, correctly predicted staged and post-commit git status output, wrote a descriptive commit message from scratch, and after an initial "not sure" on git log, correctly reasoned out that it would show message + author, then confirmed the actual hash/date/message output. Immediately after, independently repeated the add-then-commit workflow unprompted for a second, unrelated group of files (docs + tool config), correctly distinguishing the two categories after one refresher on .claude/. Later that day, ran the full stage-and-commit cycle twice more with no command dictated beyond `git add`, writing both messages themselves ("Add simple JS print message", "Add learning docs and docs for Claude") and keeping app code separate from notes/config
+- evidence: correctly predicted git status output before running it, correctly distinguished tracked/modified vs untracked files, reasoned that README/learning/.claude deserved separate commits rather than being bundled with the page files, correctly predicted staged and post-commit git status output, wrote a descriptive commit message from scratch, and after an initial "not sure" on git log, correctly reasoned out that it would show message + author, then confirmed the actual hash/date/message output. Immediately after, independently repeated the add-then-commit workflow unprompted for a second, unrelated group of files (docs + tool config), correctly distinguishing the two categories after one refresher on .claude/. Later that day, ran the full stage-and-commit cycle twice more with no command dictated beyond `git add`, writing both messages themselves ("Add simple JS print message", "Add learning docs and docs for Claude") and keeping app code separate from notes/config. Later: spotted independently that local commits and the GitHub remote are not the same thing — see [[git-remotes]]
 
 ## frontend-ui
 - status: introduced
@@ -127,7 +127,7 @@
 - depends-on: javascript
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: correctly predicted that a JS change to the h1 would survive a refresh, and unprompted added "save the file first" as a required step. Then correctly reasoned the opposite case — the same change typed into the console does NOT survive, because "the change is not saved to the disk but rather the browser". Predicted the element-vs-text distinction wrong twice (expected both `querySelector("h1")` and `.textContent` to return the content) and closed the gap immediately on seeing the real output. Confidently predicted that one `querySelector("h2")` call would change both h2s, ran it, saw only the first change. Wrote `heading.textContent = "Reel-A-Recipe";` into app.js as a fill-in with no example line, then composed `document.querySelector("#pantry-heading").textContent = "My Pantry";` from scratch given only the hint that ids are written with `#`. Reinforced later the same day: saw first-hand that the DOM the browser builds can differ from the HTML on disk, when a mistyped comma showed up in the Inspector as an invented attribute that they had not written
+- evidence: correctly predicted that a JS change to the h1 would survive a refresh, and unprompted added "save the file first" as a required step. Then correctly reasoned the opposite case — the same change typed into the console does NOT survive, because "the change is not saved to the disk but rather the browser". Predicted the element-vs-text distinction wrong twice (expected both `querySelector("h1")` and `.textContent` to return the content) and closed the gap immediately on seeing the real output. Confidently predicted that one `querySelector("h2")` call would change both h2s, ran it, saw only the first change. Wrote `heading.textContent = "Reel-A-Recipe";` into app.js as a fill-in with no example line, then composed `document.querySelector("#pantry-heading").textContent = "My Pantry";` from scratch given only the hint that ids are written with `#`. Reinforced later the same day: saw first-hand that the DOM the browser builds can differ from the HTML on disk, when a mistyped comma showed up in the Inspector as an invented attribute that they had not written. Reinforced again: distinguished `.textContent` (text between tags) from `.value` (a control's current contents) by testing both in the console
 
 ## devtools-inspector
 - status: practicing
@@ -135,6 +135,20 @@
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
 - evidence: opened the Elements/Inspector panel for the first time (guided), found their own `<input>` in the live DOM, and read its attributes back accurately — including noticing which of two stray commas survived and which had vanished, a detail sharp enough that it corrected my own expectation. Took the point that a page can render fine and still be wrong, and that the Inspector is how you tell
+
+## js-undefined
+- status: introduced
+- depends-on: javascript
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: deliberately misspelled `input.value` as `input.valu` and predicted it would throw an error. It logged `undefined` instead. Met the distinction between a misspelled property (silent `undefined`) and a misspelled variable (loud `ReferenceError`), but has only seen the first of those two failures happen
+
+## git-remotes
+- status: practicing
+- depends-on: source-control-git
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: noticed unprompted, mid-lesson, that six commits had never been pushed and asked why. Correctly predicted both halves of `git push` — that the six commits would go to GitHub and that the uncommitted `app.js` edit would stay local. Ran the push. Also asked whether pushing was in the plan, which it was not until Section 8; the concept was pulled forward on their own initiative
 
 ## js-variables
 - status: introduced
@@ -151,25 +165,25 @@
 - evidence: added `id="pantry-heading"` to a specific <h2> from a shown example, then used that id to address that one element from JavaScript. Understood the purpose — naming one element so it can be picked out from among identical siblings. 2026-08-05 (later): wrote three attributes onto one `<input>` tag from a spec, but separated them with commas (a JavaScript/Python carry-over). Correctly spotted the difference when pointed at their own working `<link>` tag ("the link tag is space separated, the input tag is comma separated") but drew the wrong conclusion about which was correct, and needed to be told. Then predicted the browser would discard the stray commas; inspected the live DOM and found one had become an attribute literally named `,`. Fixed it and verified in the Inspector
 
 ## event-listeners
-- status: seed
+- status: practicing
 - depends-on: dom
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: wrote the body of a submit listener themselves (the console.log line, then `event.preventDefault();`), and placed preventDefault first in the body unprompted. Correctly predicted the pre-preventDefault behaviour ("it will log Form Submitted! then the page reloads") and watched the log flash and vanish with the reload. Then correctly predicted all three consequences of preventDefault — log stays, no reload, typed text stays in the box. Has not yet written an `addEventListener` call from scratch; the call and its `function (event)` wrapper were given
 
 ## js-functions
-- status: seed
+- status: introduced
 - depends-on: javascript
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: met an anonymous function passed as an argument to addEventListener, and the idea that you hand a function over for the browser to call later rather than calling it yourself. Wrote statements inside the function body correctly, including using the `event` parameter. Has NOT yet written a function of their own, named or anonymous, and has not explained "a function as a value" in their own words — the wrapper was given to them both times. Check this before relying on it
 
 ## forms
 - status: practicing
 - depends-on: html-structure
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: wrote the `<input>` and `<button type="submit">Add Recipe</button>` from a written spec with no example markup to copy, and got the void-element rule right (no `</input>`). Predicted "nothing will happen" on clicking the submit button with zero JS wired up; ran it and reported the real result accurately — page reloaded, typed text gone, `?` appended to the URL. Has met the default submit-and-navigate behaviour but has not yet stopped it
+- evidence: wrote the `<input>` and `<button type="submit">Add Recipe</button>` from a written spec with no example markup to copy, and got the void-element rule right (no `</input>`). Predicted "nothing will happen" on clicking the submit button with zero JS wired up; ran it and reported the real result accurately — page reloaded, typed text gone, `?` appended to the URL. 2026-08-05 (later): stopped that default behaviour with `event.preventDefault()`, and learned that a text box's typed content lives in `.value`, not `.textContent` — ran `input.textContent` in the console, got an empty string, and connected it back to `<input>` being a void element with no inside to read
 
 ## js-objects-arrays
 - status: seed
