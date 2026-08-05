@@ -8,7 +8,7 @@
 - depends-on: none
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: correctly predicted git status output before running it, correctly distinguished tracked/modified vs untracked files, reasoned that README/learning/.claude deserved separate commits rather than being bundled with the page files, correctly predicted staged and post-commit git status output, wrote a descriptive commit message from scratch, and after an initial "not sure" on git log, correctly reasoned out that it would show message + author, then confirmed the actual hash/date/message output
+- evidence: correctly predicted git status output before running it, correctly distinguished tracked/modified vs untracked files, reasoned that README/learning/.claude deserved separate commits rather than being bundled with the page files, correctly predicted staged and post-commit git status output, wrote a descriptive commit message from scratch, and after an initial "not sure" on git log, correctly reasoned out that it would show message + author, then confirmed the actual hash/date/message output. Immediately after, independently repeated the add-then-commit workflow unprompted for a second, unrelated group of files (docs + tool config), correctly distinguishing the two categories after one refresher on .claude/
 
 ## frontend-ui
 - status: introduced
@@ -53,11 +53,11 @@
 - evidence: —
 
 ## javascript
-- status: introduced
+- status: practicing
 - depends-on: none
 - introduced: 2026-08-04
-- last-reviewed: 2026-08-04
-- evidence: locked as full-stack language; existing exposure from coursework
+- last-reviewed: 2026-08-05
+- evidence: locked as full-stack language; existing exposure from coursework. 2026-08-05: wrote their first working line of JS (`console.log("Hello");`) into app.js from an explanation of the parts, with correct quotes, parentheses and semicolon, and no example line to copy
 
 ## nodejs
 - status: introduced
@@ -98,8 +98,8 @@
 - status: practicing
 - depends-on: html-css
 - introduced: 2026-08-04
-- last-reviewed: 2026-08-04
-- evidence: correctly explained why <h1> goes in <body> not <head> ("body displays content... head is metadata... if moved to head it would show a blank page"), and correctly predicted <h1> would render as big bold text before running
+- last-reviewed: 2026-08-05
+- evidence: correctly explained why <h1> goes in <body> not <head> ("body displays content... head is metadata... if moved to head it would show a blank page"), and correctly predicted <h1> would render as big bold text before running. 2026-08-05: given only the fact that the browser reads HTML top to bottom, independently reasoned that <script> belongs after the page content — "nothing would load on the screen if the app.js file is big" (the render-blocking reason, arrived at unprompted), then placed the tag correctly just before </body>
 
 ## css-basics
 - status: practicing
@@ -107,6 +107,20 @@
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
 - evidence: correctly explained why the stylesheet link goes in <head> ("metadata task... not for the user but for the browser"), correctly predicted font-family on body would cascade to all child text and nothing else, wrote the body rule correctly, and independently wrote a second rule (h1 { color: #333; }) with correct selector/property syntax
+
+## browser-console
+- status: practicing
+- depends-on: javascript
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: correctly predicted that loading a page running console.log("Hello") would change nothing visible on the page itself, then opened DevTools and found the message in the Console tab — showing they hold the split between what the user sees and what the developer sees. Also correctly predicted a misspelled script src would produce a "can't find the file" error in the Console before seeing it
+
+## disk-vs-editor-buffer
+- status: introduced
+- depends-on: none
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: hit this live — reported "the console shows Hello" after intending to misspell the script src. Did not diagnose it themselves; once shown that index.html on disk still read app.js, immediately recognised the unsaved edit ("i see my mistake"). Worth re-checking later
 
 ## dom
 - status: seed
