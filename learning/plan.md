@@ -33,9 +33,16 @@
 - [x] Refactor `addRecipe`/`addPantry` into one `addItem(name, list)` — unplanned,
   done on their own initiative immediately after spotting the duplication
 
-### 3. A simple local server  [ ] not started
+### 3. A simple local server  [ ] in progress
 **Deliverable:** A running Express server that responds when you visit it locally.
 **Concepts:** npm-package-json, express-routes, http-request-response, localhost-ports
+
+- [x] Install Node.js and prove it runs JavaScript outside the browser
+- [ ] Create `package.json` with `npm init` and read what's inside it
+- [ ] Install Express with `npm install` and tour what appeared (`node_modules/`, `package-lock.json`)
+- [ ] Write the smallest Express server that starts and listens on a port
+- [ ] Add a route that responds with text, and visit it in the browser
+- [ ] Commit the server to git
 
 ### 4. Frontend talks to the server  [ ] not started
 **Deliverable:** The page fetches recipe data from the Express server instead of using hardcoded JS.

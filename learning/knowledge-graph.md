@@ -60,11 +60,11 @@
 - evidence: locked as full-stack language; existing exposure from coursework. 2026-08-05: wrote their first working line of JS (`console.log("Hello");`) into app.js from an explanation of the parts, with correct quotes, parentheses and semicolon, and no example line to copy
 
 ## nodejs
-- status: introduced
+- status: practicing
 - depends-on: javascript
 - introduced: 2026-08-04
-- last-reviewed: 2026-08-04
-- evidence: asked to clarify vs Express; correctly restated "Node.js runs the JavaScript"
+- last-reviewed: 2026-08-05
+- evidence: asked to clarify vs Express; correctly restated "Node.js runs the JavaScript". 2026-08-05: asked what would stop `app.js` running in the terminal, answered unprompted and correctly with the mechanism, not the symptom — "there is no document to grab an object h1... app.js requires a document to run on". Correctly predicted `node --version` would report command-not-found from their own memory of never installing it, installed Node 24 on Fedora themselves, then ran a JS file from the terminal and correctly predicted its output would land in the terminal rather than DevTools. Holds the split: the language runs anywhere, `document` is the browser's
 
 ## express
 - status: introduced
@@ -155,7 +155,7 @@
 - depends-on: js-objects-arrays
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: wrote a `for...of` loop over `recipes` calling addRecipe for each item, from a neutral `for (const colour of colours)` example and a written spec — correct syntax and correct body first time. Has only met `for...of`; classic index-counting `for` loops and array methods like forEach/map not yet introduced
+- evidence: wrote a `for...of` loop over `recipes` calling addRecipe for each item, from a neutral `for (const colour of colours)` example and a written spec — correct syntax and correct body first time. Has only met `for...of`; classic index-counting `for` loops and array methods like forEach/map not yet introduced. 2026-08-05 (later): wrote the same loop shape again from memory into a scratch Node file with no example on screen, correct first time, swapping the body from `addItem` to `console.log` unprompted
 
 ## data-driven-rendering
 - status: practicing
@@ -169,7 +169,28 @@
 - depends-on: javascript
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: deliberately misspelled `recipes` as `recipess` in the loop and correctly predicted a loud ReferenceError plus a dead page — both the list and the form stopped working. Then, asked what the `<h1>` said, answered "it says Reel-A-Recipe so the script stopped at the loop", deducing from what still worked exactly where execution halted. Holds the rule that an uncaught error stops the script at that line, so several simultaneous failures usually mean one error near the top
+- evidence: deliberately misspelled `recipes` as `recipess` in the loop and correctly predicted a loud ReferenceError plus a dead page — both the list and the form stopped working. Then, asked what the `<h1>` said, answered "it says Reel-A-Recipe so the script stopped at the loop", deducing from what still worked exactly where execution halted. Holds the rule that an uncaught error stops the script at that line, so several simultaneous failures usually mean one error near the top. 2026-08-05 (later): predicted a ReferenceError for `document` in Node — not independently, but immediately once pointed back at their own `recipess` misspelling, so the "name JavaScript can't find → loud ReferenceError" rule transferred across environments
+
+## stack-traces
+- status: introduced
+- depends-on: js-runtime-errors
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: read their first Node stack trace — met the caret/column pointer (`app.js:6:17`) and confirmed from it that execution died on `document`, never reaching `.querySelector`. Met the rule "read top-down, stop at the first line naming a file you wrote; everything below is Node's plumbing". Asked why a failure inside `addItem` would produce two `app.js` frames, said "not sure", and after a hint got the first frame (where it broke) but not the second (who called it) — the caller/call-site half was told, not retrieved. Has not yet read a stack trace for a bug they didn't set up
+
+## client-vs-server
+- status: introduced
+- depends-on: nodejs, frontend-ui, backend-logic
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: asked whether `server.js` will be able to call `document.querySelector`, answered "yes, because the server will serve the html document for app.js to work on" — the classic conflation of *sending* a document with *having* one. Given a scaffold about timing and location (Node runs server.js possibly for hours before any visitor; the browser builds the DOM from the text it receives, on the visitor's machine), corrected it themselves: "it exists on my laptop and the server cannot reach it". The correction was guided, not independent — re-check this before Section 4, where it's load-bearing
+
+## package-managers
+- status: introduced
+- depends-on: none
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: asked to install two named packages, correctly predicted dnf would list more than two — "since they will have dependencies" — and saw seven. Read the transaction summary with help: noticed `nodejs24-bin` is 154 KiB while the real engine `nodejs24-libs` is 62.8 MiB, and met "weak dependencies" as optional extras. Also met the `[y/N]` capital-letter-is-the-default convention. Comes due again immediately in [[npm-package-json]], where npm does the same job for JavaScript libraries
 
 ## js-undefined
 - status: introduced
