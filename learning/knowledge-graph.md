@@ -8,7 +8,7 @@
 - depends-on: none
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: correctly predicted git status output before running it, correctly distinguished tracked/modified vs untracked files, reasoned that README/learning/.claude deserved separate commits rather than being bundled with the page files, correctly predicted staged and post-commit git status output, wrote a descriptive commit message from scratch, and after an initial "not sure" on git log, correctly reasoned out that it would show message + author, then confirmed the actual hash/date/message output. Immediately after, independently repeated the add-then-commit workflow unprompted for a second, unrelated group of files (docs + tool config), correctly distinguishing the two categories after one refresher on .claude/
+- evidence: correctly predicted git status output before running it, correctly distinguished tracked/modified vs untracked files, reasoned that README/learning/.claude deserved separate commits rather than being bundled with the page files, correctly predicted staged and post-commit git status output, wrote a descriptive commit message from scratch, and after an initial "not sure" on git log, correctly reasoned out that it would show message + author, then confirmed the actual hash/date/message output. Immediately after, independently repeated the add-then-commit workflow unprompted for a second, unrelated group of files (docs + tool config), correctly distinguishing the two categories after one refresher on .claude/. Later that day, ran the full stage-and-commit cycle twice more with no command dictated beyond `git add`, writing both messages themselves ("Add simple JS print message", "Add learning docs and docs for Claude") and keeping app code separate from notes/config
 
 ## frontend-ui
 - status: introduced
@@ -106,28 +106,42 @@
 - depends-on: html-css
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: correctly explained why the stylesheet link goes in <head> ("metadata task... not for the user but for the browser"), correctly predicted font-family on body would cascade to all child text and nothing else, wrote the body rule correctly, and independently wrote a second rule (h1 { color: #333; }) with correct selector/property syntax
+- evidence: correctly explained why the stylesheet link goes in <head> ("metadata task... not for the user but for the browser"), correctly predicted font-family on body would cascade to all child text and nothing else, wrote the body rule correctly, and independently wrote a second rule (h1 { color: #333; }) with correct selector/property syntax. 2026-08-05 (later): carried selector syntax across into JavaScript, writing `#pantry-heading` as a querySelector argument from the single hint that ids are written with `#`
 
 ## browser-console
 - status: practicing
 - depends-on: javascript
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: correctly predicted that loading a page running console.log("Hello") would change nothing visible on the page itself, then opened DevTools and found the message in the Console tab — showing they hold the split between what the user sees and what the developer sees. Also correctly predicted a misspelled script src would produce a "can't find the file" error in the Console before seeing it
+- evidence: correctly predicted that loading a page running console.log("Hello") would change nothing visible on the page itself, then opened DevTools and found the message in the Console tab — showing they hold the split between what the user sees and what the developer sees. Also correctly predicted a misspelled script src would produce a "can't find the file" error in the Console before seeing it. Later that day, ran a series of console commands with a prediction stated before each, and used the console deliberately as a scratchpad — testing a DOM change there before committing it to a file
 
 ## disk-vs-editor-buffer
-- status: introduced
+- status: practicing
 - depends-on: none
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: hit this live — reported "the console shows Hello" after intending to misspell the script src. Did not diagnose it themselves; once shown that index.html on disk still read app.js, immediately recognised the unsaved edit ("i see my mistake"). Worth re-checking later
+- evidence: hit this live — reported "the console shows Hello" after intending to misspell the script src. Did not diagnose it themselves; once shown that index.html on disk still read app.js, immediately recognised the unsaved edit ("i see my mistake"). Worth re-checking later. Re-checked the same day and passed, from the other direction: explained without help that a console-only DOM change disappears on refresh because "the change is not saved to the disk but rather the browser", and volunteered "save the file" as a necessary step when reasoning about a JS edit taking effect
 
 ## dom
-- status: seed
+- status: practicing
 - depends-on: javascript
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: correctly predicted that a JS change to the h1 would survive a refresh, and unprompted added "save the file first" as a required step. Then correctly reasoned the opposite case — the same change typed into the console does NOT survive, because "the change is not saved to the disk but rather the browser". Predicted the element-vs-text distinction wrong twice (expected both `querySelector("h1")` and `.textContent` to return the content) and closed the gap immediately on seeing the real output. Confidently predicted that one `querySelector("h2")` call would change both h2s, ran it, saw only the first change. Wrote `heading.textContent = "Reel-A-Recipe";` into app.js as a fill-in with no example line, then composed `document.querySelector("#pantry-heading").textContent = "My Pantry";` from scratch given only the hint that ids are written with `#`
+
+## js-variables
+- status: introduced
+- depends-on: javascript
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: met `const heading = document.querySelector("h1");` in app.js (agent-written) and correctly wrote the next line against it — `heading.textContent = "Reel-A-Recipe";` — showing they understood the name was pointing at the element. Has not yet written a `const` themselves or explained in their own words what const means vs. let
+
+## html-attributes
+- status: introduced
+- depends-on: html-structure
+- introduced: 2026-08-05
+- last-reviewed: 2026-08-05
+- evidence: added `id="pantry-heading"` to a specific <h2> from a shown example, then used that id to address that one element from JavaScript. Understood the purpose — naming one element so it can be picked out from among identical siblings — but hasn't yet generalised to other attributes
 
 ## event-listeners
 - status: seed

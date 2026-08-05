@@ -23,7 +23,7 @@
 **Concepts:** dom, event-listeners, js-functions, forms, js-objects-arrays
 
 - [x] Create `app.js`, link it from `index.html`, and prove it runs in the browser console
-- [ ] Reach into the page from JavaScript and change some text on it (the DOM)
+- [x] Reach into the page from JavaScript and change some text on it (the DOM)
 - [ ] Add an HTML form with a text box and an "Add recipe" button (it won't do anything yet)
 - [ ] Listen for the form's submit event and log what was typed
 - [ ] Write a function that adds the typed recipe to the page as a new list item
