@@ -182,8 +182,8 @@
 - status: introduced
 - depends-on: nodejs, frontend-ui, backend-logic
 - introduced: 2026-08-05
-- last-reviewed: 2026-08-05
-- evidence: asked whether `server.js` will be able to call `document.querySelector`, answered "yes, because the server will serve the html document for app.js to work on" — the classic conflation of *sending* a document with *having* one. Given a scaffold about timing and location (Node runs server.js possibly for hours before any visitor; the browser builds the DOM from the text it receives, on the visitor's machine), corrected it themselves: "it exists on my laptop and the server cannot reach it". The correction was guided, not independent — re-check this before Section 4, where it's load-bearing. 2026-08-06 re-check, and it did not hold clean: asked whether npm's guess of `"main": "app.js"` was right, said "Yes. If node tries to run it there will be a ReferenceError" — holding the correct fact and the wrong conclusion in one sentence. Shown the contradiction, picked the right half without further help ("the yes gives, main should not be app.js"). Then answered `index.html` instead — reasoning from what starts the app *for a user* rather than what Node can execute. Only settled it by running `node index.html` themselves and seeing the SyntaxError, having predicted it correctly. The distinction now has a hard experiment behind it rather than an analogy, but two wrong answers on the way means it is still not automatic — keep watching it through Section 4
+- last-reviewed: 2026-08-06
+- evidence: asked whether `server.js` will be able to call `document.querySelector`, answered "yes, because the server will serve the html document for app.js to work on" — the classic conflation of *sending* a document with *having* one. Given a scaffold about timing and location (Node runs server.js possibly for hours before any visitor; the browser builds the DOM from the text it receives, on the visitor's machine), corrected it themselves: "it exists on my laptop and the server cannot reach it". The correction was guided, not independent — re-check this before Section 4, where it's load-bearing. 2026-08-06 re-check, and it did not hold clean: asked whether npm's guess of `"main": "app.js"` was right, said "Yes. If node tries to run it there will be a ReferenceError" — holding the correct fact and the wrong conclusion in one sentence. Shown the contradiction, picked the right half without further help ("the yes gives, main should not be app.js"). Then answered `index.html` instead — reasoning from what starts the app *for a user* rather than what Node can execute. Only settled it by running `node index.html` themselves and seeing the SyntaxError, having predicted it correctly. The distinction now has a hard experiment behind it rather than an analogy, but two wrong answers on the way means it is still not automatic — keep watching it through Section 4. 2026-08-06 (later, start of Section 4): asked why `server.js` needs its own copy of the `recipes` array when `app.js` already has one; answered with a real but different point (scale/relational storage — the Section 6 database reason), not the separate-programs/no-shared-memory reason being tested. Given the refresher, said "yes it makes sense" but then asked a follow-up revealing the deeper gap — thought `server.js` would *replace* `app.js` on deploy rather than both continuing to run, just relocated. Cleared once shown the coffee-shop split still applies after deployment. Two guided corrections in one exchange — still not automatic, keep watching past Section 4
 
 ## package-managers
 - status: practicing
@@ -228,11 +228,11 @@
 - evidence: renamed `form`/`input`/`list` to `recipeForm`/`recipeInput`/`recipeList` on their own initiative once a second set existed, correctly reasoning that bare names were now ambiguous. Did it first in snake_case; once told JavaScript uses camelCase, converted all twelve occurrences across declarations and uses with no stragglers left behind
 
 ## js-variables
-- status: introduced
+- status: practicing
 - depends-on: javascript
 - introduced: 2026-08-05
-- last-reviewed: 2026-08-05
-- evidence: met `const heading = document.querySelector("h1");` in app.js (agent-written) and correctly wrote the next line against it — `heading.textContent = "Reel-A-Recipe";` — showing they understood the name was pointing at the element. Has not yet written a `const` themselves or explained in their own words what const means vs. let
+- last-reviewed: 2026-08-06
+- evidence: met `const heading = document.querySelector("h1");` in app.js (agent-written) and correctly wrote the next line against it — `heading.textContent = "Reel-A-Recipe";` — showing they understood the name was pointing at the element. Has not yet written a `const` themselves or explained in their own words what const means vs. let. 2026-08-06: asked whether `const recipes` would still work once we needed to replace the whole array with fetched data (rather than just `.push()`-ing into it, which they'd done before). First answer conflated mutation with reassignment — "swapping data inside the array is allowed... const should still work" — reasoning about the wrong operation. Given the "label glued to a box" refresher (mutating the box's contents vs. re-gluing the label to a different box), said "that makes sense... I misunderstood the question," then correctly made the `const` → `let` edit themselves
 
 ## html-attributes
 - status: practicing
@@ -316,7 +316,7 @@
 - depends-on: express, http-request-response
 - introduced: 2026-08-06
 - last-reviewed: 2026-08-06
-- evidence: met routes as the thing Express exists to provide, and diagnosed their absence from a real 404 — "it doesn't have a route for /". Same day: wrote their first route. Given the shape `app.get(path, handler)` and told that `response.send()` replies, filled in both gaps themselves — read the path `/` off the `Cannot GET /` message rather than being told it, and wrote `response.send("Welcome to my Express server!")` with no example line to copy. Then predicted `Cannot GET /recipes` for an unregistered path and confirmed it, showing they hold that a route matches one specific path and nothing else. Has only written `app.get`; POST and other methods, route parameters, and `res.json` not yet introduced
+- evidence: met routes as the thing Express exists to provide, and diagnosed their absence from a real 404 — "it doesn't have a route for /". Same day: wrote their first route. Given the shape `app.get(path, handler)` and told that `response.send()` replies, filled in both gaps themselves — read the path `/` off the `Cannot GET /` message rather than being told it, and wrote `response.send("Welcome to my Express server!")` with no example line to copy. Then predicted `Cannot GET /recipes` for an unregistered path and confirmed it, showing they hold that a route matches one specific path and nothing else. Has only written `app.get`; POST and other methods, route parameters, and `res.json` not yet introduced. 2026-08-06 (later): met `response.json()` as a sibling of `response.send()` — takes a JS value instead of a string, serializes it, and sets the content-type header. Wrote `app.get("/recipes", ...)` and `response.json(recipes)` themselves from an explanation and a `response.send` line to pattern-match against, no example of `response.json` itself to copy. 2026-08-06 (later): correctly predicted, before running, that visiting `/recipes` would show the array formatted as JSON. Restarted the server themselves (recalling `server-restart-required` unprompted) and confirmed the prediction against the real response. 2026-08-06 (later still): unprompted, added a `pantry` array and `app.get("/pantry", ...)` route to `server.js` from memory, correctly matching the `/recipes` pattern with no instruction to do so — a head start on task 4
 
 ## server-restart-required
 - status: practicing
@@ -360,26 +360,31 @@
 - last-reviewed: 2026-08-06
 - evidence: chose 3000 from a spec ("above 1024, 3000 is the Node convention") and wrote it into `app.listen` themselves. Asked what URL would reach the running server, answered `localhost:3000` unprompted. Then predicted `ERR_CONNECTION_REFUSED` after Ctrl+C and gave the mechanism, not just the symptom — "the server has stopped at the port and a connection is severed". Holds the fork: a reply you don't like (404) means look at your code, silence (connection refused) means look at whether the server is up. Met the port-as-numbered-door model and the below-1024-is-reserved rule, but has not yet hit a port collision (`EADDRINUSE`)
 
-## fetch-api
-- status: seed
+## express-static-serving
+- status: practicing
+- depends-on: express-routes, express
+- introduced: 2026-08-06
+- last-reviewed: 2026-08-06
+- evidence: unplanned detour — diagnosed themselves, before being told, that `index.html`/`app.js` had never actually been served by Express, so there was nothing for `fetch` to run against ("I have not linked the index.html page and neither have i linked the app.js therefore i can't see an output"). Given `app.use(express.static(__dirname))` and told that Express checks middleware top-to-bottom same as routes, correctly reasoned out where to place it (above the existing `app.get("/")`) and why (static-after-route would mean the plain-text route wins). Then asked to extend that same "stops at the first match" logic one step further — does static finding `index.html` also let `app.get("/")` run afterward — first guessed the opposite of their own stated rule ("yes it is reached"), caught themselves as a guess, and landed on the right answer with a shakier reason. Given the request/response pipeline mechanism (send-and-stop vs. `next()`), understood it cleanly and chose to delete the now-dead `app.get("/")` route themselves. The ordering logic is solid when applied forward but wobbled once applied backward — worth a re-check
+- status: practicing
 - depends-on: express-routes, dom
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- introduced: 2026-08-06
+- last-reviewed: 2026-08-06
+- evidence: given the concept explained (network requests take time, unlike reading a local array), engaged with `fetch("/recipes")` and the two-stage `await response.json()` unpacking — syntax was written for them, but they made the surrounding changes themselves: swapped `const recipes` to `let recipes = []` after correctly reasoning through why (see [[js-variables]]), filled in the render loop inside `loadRecipes()` from the known for-of/addItem pattern with no example to copy, correctly predicted the page would load with both lists showing at `localhost:3000`, and — unprompted — verified the fetch actually happened by finding the `/recipes` request in DevTools' Network tab rather than trusting the identical-looking output. 2026-08-06 (later): completed the pattern for pantry — correctly predicted the pantry list would stay empty since `loadPantry()` was defined but never called, then added the missing call themselves and confirmed both lists rendered from the server on refresh
 
 ## json
 - status: practicing
 - depends-on: none
 - introduced: 2026-08-06
 - last-reviewed: 2026-08-06
-- evidence: first contact via package.json, pulled forward from Section 4. Hand-edited two values in a real JSON file without breaking it, then broke it deliberately: removed one comma and correctly predicted the failure would be a SyntaxError "because the file cannot be read" — choosing parse-time over run-time for the right reason, unprompted. Read the resulting EJSONPARSE error and worked out on their own why it names line 17 when the comma was deleted from line 16 ("it kept reading until it found something wrong"). Met the rule that a parser reports where it *noticed*, not where you erred. Met that JSON has no comments. Has only met JSON as a config file on disk — not yet as data sent over a network, which is where it comes due in Section 4 → [[fetch-api]]
+- evidence: first contact via package.json, pulled forward from Section 4. Hand-edited two values in a real JSON file without breaking it, then broke it deliberately: removed one comma and correctly predicted the failure would be a SyntaxError "because the file cannot be read" — choosing parse-time over run-time for the right reason, unprompted. Read the resulting EJSONPARSE error and worked out on their own why it names line 17 when the comma was deleted from line 16 ("it kept reading until it found something wrong"). Met the rule that a parser reports where it *noticed*, not where you erred. Met that JSON has no comments. Has only met JSON as a config file on disk — not yet as data sent over a network, which is where it comes due in Section 4 → [[fetch-api]]. 2026-08-06 (later): first contact with JSON as network data — added `response.json(recipes)` to a new `/recipes` route in `server.js`, converting a JS array to a JSON response. Not yet seen the actual bytes that come back (no browser visit this lesson) or consumed JSON on the receiving end — 2026-08-06 (later): saw the real bytes for the first time — correctly predicted the browser would show the array formatted as JSON text before visiting `/recipes`, and confirmed it. 2026-08-06 (later still): closed the loop — `response.json()` on the server became `await response.json()` on the client, unpacked into a real array `app.js` renders from. Confirmed the full round trip actually happened via the Network tab rather than trusting the (identical-looking) visual result
 
 ## async-await
-- status: seed
+- status: practicing
 - depends-on: js-functions
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- introduced: 2026-08-06
+- last-reviewed: 2026-08-06
+- evidence: met `async function` and `await` via the fetch analogy (network requests take real time, `await` pauses just that function rather than freezing the page). The first instance, `loadRecipes()`, was written for them. Then, unprompted and from memory, wrote a second instance — `loadPantry()` — reproducing the full `async function` / `await fetch(...)` / `await response.json()` shape correctly with no example on screen at the time. Predicted correctly (pantry list would stay empty) that the function existed but was never called, then wired up the missing `loadPantry();` call themselves and confirmed both lists populated from the server on refresh
 
 ## sql-basics
 - status: seed

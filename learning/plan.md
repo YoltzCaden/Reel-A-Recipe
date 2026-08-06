@@ -48,6 +48,12 @@
 **Deliverable:** The page fetches recipe data from the Express server instead of using hardcoded JS.
 **Concepts:** fetch-api, json, async-await
 
+- [x] Add a route in `server.js` that responds with the recipes array as JSON
+- [x] Predict what visiting that route in the browser will show, then check
+- [x] In `app.js`, replace the hardcoded `recipes` array with a `fetch()` call to the new route, and render the list from the response
+- [x] Repeat the pattern for pantry, from memory
+- [ ] Commit the change to git
+
 ### 5. Making it look like a real app  [ ] not started
 **Deliverable:** The page has a proper centred layout, styled forms and lists, a consistent colour palette, and holds up at phone width.
 **Concepts:** css-classes, box-model, flexbox, responsive-basics, colour-and-typography
