@@ -312,11 +312,18 @@
 - evidence: ran `ls node_modules | wc -l` after being told what both halves do. The `|` and `wc -l` were explained, not retrieved — no independent evidence yet. Re-check by asking them to count something else
 
 ## express-routes
-- status: introduced
+- status: practicing
 - depends-on: express, http-request-response
 - introduced: 2026-08-06
 - last-reviewed: 2026-08-06
-- evidence: met routes as the thing Express exists to provide, and diagnosed their absence from a real 404 — "it doesn't have a route for /". Has not written one yet; that is the next task
+- evidence: met routes as the thing Express exists to provide, and diagnosed their absence from a real 404 — "it doesn't have a route for /". Same day: wrote their first route. Given the shape `app.get(path, handler)` and told that `response.send()` replies, filled in both gaps themselves — read the path `/` off the `Cannot GET /` message rather than being told it, and wrote `response.send("Welcome to my Express server!")` with no example line to copy. Then predicted `Cannot GET /recipes` for an unregistered path and confirmed it, showing they hold that a route matches one specific path and nothing else. Has only written `app.get`; POST and other methods, route parameters, and `res.json` not yet introduced
+
+## server-restart-required
+- status: practicing
+- depends-on: long-running-processes, disk-vs-editor-buffer
+- introduced: 2026-08-06
+- last-reviewed: 2026-08-06
+- evidence: hit this unprompted and in the wild. Added a route, saved, refreshed, saw no change, and diagnosed and fixed it themselves before being asked to predict anything — "I was trying to get the message to show up but it didn't so i shut the server and started it again and that fixed it". Fixed by trial, but then gave the mechanism cold when asked why: "node reads the file once when it starts". Met the asymmetry with the browser — a refresh re-fetches `app.js`, but a refresh cannot reach into an already-running Node process. Told that file-watching auto-restart tools exist; deliberately not installed → parked
 
 ## commonjs-require
 - status: introduced
@@ -330,7 +337,7 @@
 - depends-on: js-functions, event-listeners
 - introduced: 2026-08-06
 - last-reviewed: 2026-08-06
-- evidence: generalised the pattern across two unrelated APIs. Having previously written the body of an `addEventListener` callback, wrote the body of the `app.listen` callback from the analogy alone — you hand a function over and something *else* decides when to call it. Understood why the "server is running" message belongs inside the function rather than on the following line: Express calls it only once the server is genuinely accepting connections. Has still not written the `function () { ... }` wrapper itself from scratch — both times it was given
+- evidence: generalised the pattern across two unrelated APIs. Having previously written the body of an `addEventListener` callback, wrote the body of the `app.listen` callback from the analogy alone — you hand a function over and something *else* decides when to call it. Understood why the "server is running" message belongs inside the function rather than on the following line: Express calls it only once the server is genuinely accepting connections. Has still not written the `function () { ... }` wrapper itself from scratch — all three times it was given. 2026-08-06 (later): met the third instance of the pattern in `app.get`, and the distinction that matters — `app.listen`'s callback runs once at startup, `app.get`'s runs every time a matching request arrives
 
 ## long-running-processes
 - status: practicing
@@ -344,7 +351,7 @@
 - depends-on: nodejs, client-vs-server
 - introduced: 2026-08-06
 - last-reviewed: 2026-08-06
-- evidence: was told what `GET` and `/` mean in the message `Cannot GET /`, then supplied the conclusion themselves — "it doesn't have a route for /". Correctly separated the two failure modes by prediction: a 404 is the server *replying* that it has nothing for that URL, while `ERR_CONNECTION_REFUSED` is no reply at all. Took the point that a server sends only what it is told to send — `index.html` sat in the same folder and was not served. Has only met `GET`; other methods, status codes as numbers, and headers not yet introduced → [[express-routes]]
+- evidence: was told what `GET` and `/` mean in the message `Cannot GET /`, then supplied the conclusion themselves — "it doesn't have a route for /". Correctly separated the two failure modes by prediction: a 404 is the server *replying* that it has nothing for that URL, while `ERR_CONNECTION_REFUSED` is no reply at all. Took the point that a server sends only what it is told to send — `index.html` sat in the same folder and was not served. Has only met `GET`; other methods, status codes as numbers, and headers not yet introduced → [[express-routes]]. 2026-08-06 (later): met the request/response pair as the two arguments Express hands a route handler, and that nothing is sent to the browser until `response.send` is called. Then closed the loop they opened earlier — the same `Cannot GET` message they had diagnosed as a missing route was made to disappear by adding that route, and reappeared on a different path
 
 ## localhost-ports
 - status: practicing
@@ -480,11 +487,11 @@
 - evidence: —
 
 ## bug-fixing
-- status: introduced
+- status: practicing
 - depends-on: none
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: located where a script stopped executing by reasoning about which effects had and hadn't happened, rather than by reading the stack trace. That is real debugging reasoning, but it was a break I set up deliberately with a prediction asked for in advance — they have not yet diagnosed a bug they didn't know was coming. See [[js-runtime-errors]]. 2026-08-05 (later): predicted the exact failure of their own half-finished rename before running it, and learned that four broken call sites produce one error at a time because the script halts at the first — so "fix, refresh, repeat" is the expected workflow, not a sign of going in circles. 2026-08-06: read an npm EJSONPARSE error they had not seen before and located the real cause a line above where the error pointed, reasoning it out rather than being told → [[syntax-vs-runtime-errors]]
+- evidence: located where a script stopped executing by reasoning about which effects had and hadn't happened, rather than by reading the stack trace. That is real debugging reasoning, but it was a break I set up deliberately with a prediction asked for in advance — they have not yet diagnosed a bug they didn't know was coming. See [[js-runtime-errors]]. 2026-08-05 (later): predicted the exact failure of their own half-finished rename before running it, and learned that four broken call sites produce one error at a time because the script halts at the first — so "fix, refresh, repeat" is the expected workflow, not a sign of going in circles. 2026-08-06 (later): **the standing debt on this concept is paid** — diagnosed and fixed a failure nobody had set up for them and nobody had warned them about, silently, mid-lesson. Saved a correct route, saw the browser not change, and restarted the server on their own initiative. The fix came before the explanation, which is the normal order for real debugging → [[server-restart-required]]. 2026-08-06: read an npm EJSONPARSE error they had not seen before and located the real cause a line above where the error pointed, reasoning it out rather than being told → [[syntax-vs-runtime-errors]]
 
 ## ui-polish
 - status: seed
