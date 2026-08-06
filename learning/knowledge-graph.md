@@ -493,9 +493,44 @@
 - last-reviewed: 2026-08-05
 - evidence: located where a script stopped executing by reasoning about which effects had and hadn't happened, rather than by reading the stack trace. That is real debugging reasoning, but it was a break I set up deliberately with a prediction asked for in advance — they have not yet diagnosed a bug they didn't know was coming. See [[js-runtime-errors]]. 2026-08-05 (later): predicted the exact failure of their own half-finished rename before running it, and learned that four broken call sites produce one error at a time because the script halts at the first — so "fix, refresh, repeat" is the expected workflow, not a sign of going in circles. 2026-08-06 (later): **the standing debt on this concept is paid** — diagnosed and fixed a failure nobody had set up for them and nobody had warned them about, silently, mid-lesson. Saved a correct route, saw the browser not change, and restarted the server on their own initiative. The fix came before the explanation, which is the normal order for real debugging → [[server-restart-required]]. 2026-08-06: read an npm EJSONPARSE error they had not seen before and located the real cause a line above where the error pointed, reasoning it out rather than being told → [[syntax-vs-runtime-errors]]
 
-## ui-polish
+## css-classes
+- status: seed
+- depends-on: css-basics, html-attributes
+- introduced: —
+- last-reviewed: —
+- evidence: —
+
+## box-model
 - status: seed
 - depends-on: css-basics
+- introduced: —
+- last-reviewed: —
+- evidence: —
+
+## flexbox
+- status: seed
+- depends-on: box-model
+- introduced: —
+- last-reviewed: —
+- evidence: —
+
+## responsive-basics
+- status: seed
+- depends-on: flexbox
+- introduced: —
+- last-reviewed: —
+- evidence: —
+
+## colour-and-typography
+- status: seed
+- depends-on: css-basics
+- introduced: —
+- last-reviewed: —
+- evidence: —
+
+## ui-polish
+- status: seed
+- depends-on: css-basics, flexbox, colour-and-typography
 - introduced: —
 - last-reviewed: —
 - evidence: —

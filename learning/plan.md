@@ -48,22 +48,26 @@
 **Deliverable:** The page fetches recipe data from the Express server instead of using hardcoded JS.
 **Concepts:** fetch-api, json, async-await
 
-### 5. Remembering things  [ ] not started
+### 5. Making it look like a real app  [ ] not started
+**Deliverable:** The page has a proper centred layout, styled forms and lists, a consistent colour palette, and holds up at phone width.
+**Concepts:** css-classes, box-model, flexbox, responsive-basics, colour-and-typography
+
+### 6. Remembering things  [ ] not started
 **Deliverable:** Recipes and pantry items are saved in PostgreSQL and survive a refresh or server restart.
 **Concepts:** sql-basics, tables-schema, node-postgres-connection, environment-variables, primary-keys
 
-### 6. The core feature  [ ] not started
+### 7. The core feature  [ ] not started
 **Deliverable:** The app shows which saved recipes you can make right now from your pantry, and builds a shopping list of missing ingredients for a chosen recipe.
 **Concepts:** relational-joins, many-to-many-relationships, backend-business-logic
 
-### 7. Tests and safety rails  [ ] not started
+### 8. Tests and safety rails  [ ] not started
 **Deliverable:** Automated tests checking the matching logic works correctly, plus basic input validation (e.g. can't add an empty recipe).
 **Concepts:** automated-testing, input-validation, error-handling
 
-### 8. Going live  [ ] not started
+### 9. Going live  [ ] not started
 **Deliverable:** The app is deployed on Render with a live database, reachable from your phone at a real URL.
 **Concepts:** deployment-workflow, production-env-vars, git-push-to-deploy
 
-### 9. Finishing the MVP loop  [ ] not started
+### 10. Finishing the MVP loop  [ ] not started
 **Deliverable:** All four MVP features (recipe box, pantry, matching, shopping list) work end-to-end on the live app, polished enough to actually use for real grocery shopping.
 **Concepts:** end-to-end-review, bug-fixing, ui-polish
