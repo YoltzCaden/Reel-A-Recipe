@@ -2,9 +2,18 @@ const express = require("express");
 
 const app = express();
 
+app.use(express.static(__dirname));
 
-app.get("/", function (request, response) {
-    response.send("Welcome to my Express server!");
+const recipes = ["Egg Fried Rice", "Mince on Bread", "Chicken Stir Fry"];
+const pantry = ["Onions", "Rice", "Eggs", "Bread", "Mince", "Chicken"];
+
+app.get("/recipes", function (request, response) {
+    response.json(recipes);
+});
+
+app.get("/pantry", function(request, response) {
+    response.json(pantry);
+
 });
 
 app.listen(3000, function () {

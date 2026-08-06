@@ -17,9 +17,9 @@ const pantryInput = document.querySelector("#pantry-input");
 const recipeList = document.querySelector("#recipe-list");
 const pantryList = document.querySelector("#pantry-list");
 
-const recipes = ["Egg Fried Rice", "Mince on Bread", "Chicken Stir Fry"];
+let recipes = [];
 
-const pantry = ["Onions", "Rice", "Eggs", "Bread", "Mince", "Chicken"];
+let pantry = [];
 
 function addItem(name, list) {
     const item = document.createElement("li");
@@ -27,13 +27,29 @@ function addItem(name, list) {
     list.appendChild(item);
 }
 
-for (const recipe of recipes) {
-    addItem(recipe, recipeList);
+async function loadRecipes() {
+    const response = await fetch("/recipes");
+    recipes = await response.json();
+
+    for (const recipe of recipes) {
+        addItem(recipe, recipeList);
+    }
+
 }
 
-for (const item of pantry) {
-    addItem(item, pantryList);
+loadRecipes();
+
+async function loadPantry() {
+    const response = await fetch("/pantry");
+    pantry = await response.json();
+
+    for (const item of pantry) {
+        addItem(item, pantryList);
+    }
+
 }
+
+loadPantry();
 
 // When the form is submitted, run this function.
 recipeForm.addEventListener("submit", function (event) {
