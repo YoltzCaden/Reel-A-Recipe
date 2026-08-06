@@ -39,7 +39,7 @@
 
 - [x] Install Node.js and prove it runs JavaScript outside the browser
 - [x] Create `package.json` with `npm init` and read what's inside it
-- [ ] Install Express with `npm install` and tour what appeared (`node_modules/`, `package-lock.json`)
+- [x] Install Express with `npm install` and tour what appeared (`node_modules/`, `package-lock.json`)
 - [ ] Write the smallest Express server that starts and listens on a port
 - [ ] Add a route that responds with text, and visit it in the browser
 - [ ] Commit the server to git

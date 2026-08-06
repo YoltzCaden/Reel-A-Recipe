@@ -8,7 +8,7 @@
 - depends-on: none
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: correctly predicted git status output before running it, correctly distinguished tracked/modified vs untracked files, reasoned that README/learning/.claude deserved separate commits rather than being bundled with the page files, correctly predicted staged and post-commit git status output, wrote a descriptive commit message from scratch, and after an initial "not sure" on git log, correctly reasoned out that it would show message + author, then confirmed the actual hash/date/message output. Immediately after, independently repeated the add-then-commit workflow unprompted for a second, unrelated group of files (docs + tool config), correctly distinguishing the two categories after one refresher on .claude/. Later that day, ran the full stage-and-commit cycle twice more with no command dictated beyond `git add`, writing both messages themselves ("Add simple JS print message", "Add learning docs and docs for Claude") and keeping app code separate from notes/config. Later: spotted independently that local commits and the GitHub remote are not the same thing — see [[git-remotes]]
+- evidence: correctly predicted git status output before running it, correctly distinguished tracked/modified vs untracked files, reasoned that README/learning/.claude deserved separate commits rather than being bundled with the page files, correctly predicted staged and post-commit git status output, wrote a descriptive commit message from scratch, and after an initial "not sure" on git log, correctly reasoned out that it would show message + author, then confirmed the actual hash/date/message output. Immediately after, independently repeated the add-then-commit workflow unprompted for a second, unrelated group of files (docs + tool config), correctly distinguishing the two categories after one refresher on .claude/. Later that day, ran the full stage-and-commit cycle twice more with no command dictated beyond `git add`, writing both messages themselves ("Add simple JS print message", "Add learning docs and docs for Claude") and keeping app code separate from notes/config. Later: spotted independently that local commits and the GitHub remote are not the same thing — see [[git-remotes]]. 2026-08-06: predicted `git status` correctly twice in one lesson, before and after adding a `.gitignore`, and distinguished untracked from modified without prompting. Wrote both of the day's commit messages themselves → [[gitignore]]
 
 ## frontend-ui
 - status: introduced
@@ -68,10 +68,10 @@
 
 ## express
 - status: introduced
-- depends-on: nodejs
+- depends-on: nodejs, package-managers
 - introduced: 2026-08-04
-- last-reviewed: 2026-08-04
-- evidence: "Using Express would give me a more hands-on understanding... nothing handed to me like Django"
+- last-reviewed: 2026-08-06
+- evidence: "Using Express would give me a more hands-on understanding... nothing handed to me like Django". 2026-08-06: installed it, but the concept check beforehand missed — asked what Express does that plain Node doesn't, answered "it is going to host my project on my laptop", which is Node's job, not Express's. Was told the actual distinction (raw Node funnels every request into one function and you hand-write the URL if/else; Express turns that into named routes) rather than retrieving it. Did then explore the installed package on disk and correctly identify it as ordinary JavaScript files someone else wrote. Stays `introduced` — the "why Express" answer has not yet been given in their own words. Re-check when writing the first route in [[express-routes]]
 
 ## html-css
 - status: introduced
@@ -186,11 +186,11 @@
 - evidence: asked whether `server.js` will be able to call `document.querySelector`, answered "yes, because the server will serve the html document for app.js to work on" — the classic conflation of *sending* a document with *having* one. Given a scaffold about timing and location (Node runs server.js possibly for hours before any visitor; the browser builds the DOM from the text it receives, on the visitor's machine), corrected it themselves: "it exists on my laptop and the server cannot reach it". The correction was guided, not independent — re-check this before Section 4, where it's load-bearing. 2026-08-06 re-check, and it did not hold clean: asked whether npm's guess of `"main": "app.js"` was right, said "Yes. If node tries to run it there will be a ReferenceError" — holding the correct fact and the wrong conclusion in one sentence. Shown the contradiction, picked the right half without further help ("the yes gives, main should not be app.js"). Then answered `index.html` instead — reasoning from what starts the app *for a user* rather than what Node can execute. Only settled it by running `node index.html` themselves and seeing the SyntaxError, having predicted it correctly. The distinction now has a hard experiment behind it rather than an analogy, but two wrong answers on the way means it is still not automatic — keep watching it through Section 4
 
 ## package-managers
-- status: introduced
+- status: practicing
 - depends-on: none
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: asked to install two named packages, correctly predicted dnf would list more than two — "since they will have dependencies" — and saw seven. Read the transaction summary with help: noticed `nodejs24-bin` is 154 KiB while the real engine `nodejs24-libs` is 62.8 MiB, and met "weak dependencies" as optional extras. Also met the `[y/N]` capital-letter-is-the-default convention. Comes due again immediately in [[npm-package-json]], where npm does the same job for JavaScript libraries. 2026-08-06: met the second package manager, npm, and correctly deduced from memory of the dnf transaction that it had already arrived alongside Node. Met the scope distinction — dnf manages software for the whole machine, npm manages libraries for one project folder. Still `introduced` rather than `practicing`: has run `npm init` but has not yet installed a package with npm, which is the next task
+- evidence: asked to install two named packages, correctly predicted dnf would list more than two — "since they will have dependencies" — and saw seven. Read the transaction summary with help: noticed `nodejs24-bin` is 154 KiB while the real engine `nodejs24-libs` is 62.8 MiB, and met "weak dependencies" as optional extras. Also met the `[y/N]` capital-letter-is-the-default convention. Comes due again immediately in [[npm-package-json]], where npm does the same job for JavaScript libraries. 2026-08-06: met the second package manager, npm, and correctly deduced from memory of the dnf transaction that it had already arrived alongside Node. Met the scope distinction — dnf manages software for the whole machine, npm manages libraries for one project folder. 2026-08-06 (later): ran their first `npm install`. Predicted `node_modules/` would appear from prior exposure, and predicted unprompted that Express would arrive "with all the other packages express is dependent on, these are called dependencies" — using the term correctly and transferring the reasoning straight from the dnf transaction. Then went past the fact to the mechanism: after finding a `package.json` inside `node_modules/express`, explained without help how one request became 65 folders — "npm read express's package.json and installed its dependencies too" → [[dependency-tree]]
 
 ## js-undefined
 - status: introduced
@@ -281,7 +281,7 @@
 - depends-on: nodejs, package-managers
 - introduced: 2026-08-06
 - last-reviewed: 2026-08-06
-- evidence: predicted `npm --version` would report a version *before* running it, and gave real evidence rather than a guess — recalled the package name `nodejs24-npm-bin` scrolling past in the previous day's dnf transaction. Ran `npm init` and accepted the defaults. Predicted the resulting file would be "filled with dependencies installed"; on seeing no `dependencies` key at all, immediately gave the correct reason unprompted — "because I haven't installed any". Wrote their own one-sentence `description` replacing the markdown npm had scraped out of README.md. Got `main` wrong twice before getting it right (see [[client-vs-server]]), which is where the real learning was. Has not yet run `npm install` — that is the next task
+- evidence: predicted `npm --version` would report a version *before* running it, and gave real evidence rather than a guess — recalled the package name `nodejs24-npm-bin` scrolling past in the previous day's dnf transaction. Ran `npm init` and accepted the defaults. Predicted the resulting file would be "filled with dependencies installed"; on seeing no `dependencies` key at all, immediately gave the correct reason unprompted — "because I haven't installed any". Wrote their own one-sentence `description` replacing the markdown npm had scraped out of README.md. Got `main` wrong twice before getting it right (see [[client-vs-server]]), which is where the real learning was. 2026-08-06 (later): saw the `dependencies` field appear on the first `npm install`, exactly as they had reasoned the day before → [[dependency-tree]]
 
 ## syntax-vs-runtime-errors
 - status: practicing
@@ -289,6 +289,27 @@
 - introduced: 2026-08-06
 - last-reviewed: 2026-08-06
 - evidence: met the split by running their own two files through Node — `app.js` parsed fine and died at `document` with a ReferenceError (failed *while running*), `index.html` never parsed at all and died with a SyntaxError (failed *while reading*). Predicted the `index.html` SyntaxError before running it. Then transferred the distinction unaided to a third case: asked whether a missing comma in package.json would fail like the ReferenceError or the SyntaxError, chose SyntaxError with the correct reason — "because the file cannot be read". Also worked out unprompted why a parse error names the line *after* the mistake ("it kept reading until it found something wrong"), and met the rule: a parser reports where it noticed, not where you erred — when the flagged line looks fine, check the line above → [[json]], [[stack-traces]]
+
+## dependency-tree
+- status: practicing
+- depends-on: package-managers, npm-package-json
+- introduced: 2026-08-06
+- last-reviewed: 2026-08-06
+- evidence: predicted ~10 entries in `node_modules` and found 65 — the gap did the teaching. Met the three-way split: `package.json` is the shopping list (what you asked for), `node_modules/` is the delivered goods (machine-made, never edited, always rebuildable), `package-lock.json` is the itemised receipt pinning exact versions. Met caret ranges (`^5.2.1` = 5.2.1 or newer within 5.x) as the reason a lock file has to exist. Explained the recursion themselves once shown that Express ships its own `package.json`. Has not yet deleted and rebuilt `node_modules` to prove the "always rebuildable" claim first-hand → [[gitignore]]
+
+## gitignore
+- status: practicing
+- depends-on: source-control-git
+- introduced: 2026-08-06
+- last-reviewed: 2026-08-06
+- evidence: asked which of `node_modules/` and `package-lock.json` belonged in git, answered correctly and gave *both* independent reasons unprompted — "I can always build node_modules back from scratch using package-lock" and "all the packages node_modules will hold would use up a lot of space". Wrote `.gitignore` themselves from a spec, correct filename, correct trailing-slash convention, no example to copy. Then predicted the exact post-ignore `git status` — `.gitignore` and `package-lock.json` untracked, `node_modules` gone — and spotted that `package.json` had also become *modified*, which was not part of the question. Has only met the folder-name pattern; wildcards and negation not yet introduced
+
+## shell-pipes
+- status: introduced
+- depends-on: none
+- introduced: 2026-08-06
+- last-reviewed: 2026-08-06
+- evidence: ran `ls node_modules | wc -l` after being told what both halves do. The `|` and `wc -l` were explained, not retrieved — no independent evidence yet. Re-check by asking them to count something else
 
 ## express-routes
 - status: seed
