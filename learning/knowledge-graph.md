@@ -67,11 +67,11 @@
 - evidence: asked to clarify vs Express; correctly restated "Node.js runs the JavaScript". 2026-08-05: asked what would stop `app.js` running in the terminal, answered unprompted and correctly with the mechanism, not the symptom — "there is no document to grab an object h1... app.js requires a document to run on". Correctly predicted `node --version` would report command-not-found from their own memory of never installing it, installed Node 24 on Fedora themselves, then ran a JS file from the terminal and correctly predicted its output would land in the terminal rather than DevTools. Holds the split: the language runs anywhere, `document` is the browser's. 2026-08-06: ran `node index.html` after correctly predicting a SyntaxError, and met the rule that Node reads every file handed to it as JavaScript regardless of extension → [[syntax-vs-runtime-errors]]
 
 ## express
-- status: introduced
+- status: practicing
 - depends-on: nodejs, package-managers
 - introduced: 2026-08-04
 - last-reviewed: 2026-08-06
-- evidence: "Using Express would give me a more hands-on understanding... nothing handed to me like Django". 2026-08-06: installed it, but the concept check beforehand missed — asked what Express does that plain Node doesn't, answered "it is going to host my project on my laptop", which is Node's job, not Express's. Was told the actual distinction (raw Node funnels every request into one function and you hand-write the URL if/else; Express turns that into named routes) rather than retrieving it. Did then explore the installed package on disk and correctly identify it as ordinary JavaScript files someone else wrote. Stays `introduced` — the "why Express" answer has not yet been given in their own words. Re-check when writing the first route in [[express-routes]]
+- evidence: "Using Express would give me a more hands-on understanding... nothing handed to me like Django". 2026-08-06: installed it, but the concept check beforehand missed — asked what Express does that plain Node doesn't, answered "it is going to host my project on my laptop", which is Node's job, not Express's. Was told the actual distinction (raw Node funnels every request into one function and you hand-write the URL if/else; Express turns that into named routes) rather than retrieving it. Did then explore the installed package on disk and correctly identify it as ordinary JavaScript files someone else wrote. 2026-08-06 (later): debt paid on re-check. First answer was still generic ("saves me from rewriting existing code"), but given one concrete scaffold — three different URLs all arriving at the same function — named the actual problem Express solves without further help: "an if else statement for each url". Then built and ran a working Express server, and read its 404 correctly. Retrieved with a nudge rather than cold, so `practicing` not `understood`
 
 ## html-css
 - status: introduced
@@ -312,25 +312,46 @@
 - evidence: ran `ls node_modules | wc -l` after being told what both halves do. The `|` and `wc -l` were explained, not retrieved — no independent evidence yet. Re-check by asking them to count something else
 
 ## express-routes
-- status: seed
-- depends-on: express
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- status: introduced
+- depends-on: express, http-request-response
+- introduced: 2026-08-06
+- last-reviewed: 2026-08-06
+- evidence: met routes as the thing Express exists to provide, and diagnosed their absence from a real 404 — "it doesn't have a route for /". Has not written one yet; that is the next task
+
+## commonjs-require
+- status: introduced
+- depends-on: nodejs, dependency-tree
+- introduced: 2026-08-06
+- last-reviewed: 2026-08-06
+- evidence: met `const express = require("express");` and the fact that Node files share nothing unless explicitly imported. Asked where Node physically looks when that line runs, answered `node_modules` correctly — a connection they made rather than one I stated. Met that this is CommonJS, the module system their own `package.json` already declared with `"type": "commonjs"`, and that `import` is the newer alternative. Has not yet written a `require` line themselves, nor exported anything from a file of their own
+
+## callbacks
+- status: practicing
+- depends-on: js-functions, event-listeners
+- introduced: 2026-08-06
+- last-reviewed: 2026-08-06
+- evidence: generalised the pattern across two unrelated APIs. Having previously written the body of an `addEventListener` callback, wrote the body of the `app.listen` callback from the analogy alone — you hand a function over and something *else* decides when to call it. Understood why the "server is running" message belongs inside the function rather than on the following line: Express calls it only once the server is genuinely accepting connections. Has still not written the `function () { ... }` wrapper itself from scratch — both times it was given
+
+## long-running-processes
+- status: practicing
+- depends-on: nodejs, localhost-ports
+- introduced: 2026-08-06
+- last-reviewed: 2026-08-06
+- evidence: asked whether the shell prompt would come back after `node server.js`, answered no and gave the reason plus the escape hatch unprompted — "the server will be running, like a process in a terminal for which i have to ctrl+c to shut it down". Holds the contrast with every previous Node run, which reached the end of the file and exited; `listen` keeps the process alive waiting for connections
 
 ## http-request-response
-- status: seed
-- depends-on: nodejs
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- status: practicing
+- depends-on: nodejs, client-vs-server
+- introduced: 2026-08-06
+- last-reviewed: 2026-08-06
+- evidence: was told what `GET` and `/` mean in the message `Cannot GET /`, then supplied the conclusion themselves — "it doesn't have a route for /". Correctly separated the two failure modes by prediction: a 404 is the server *replying* that it has nothing for that URL, while `ERR_CONNECTION_REFUSED` is no reply at all. Took the point that a server sends only what it is told to send — `index.html` sat in the same folder and was not served. Has only met `GET`; other methods, status codes as numbers, and headers not yet introduced → [[express-routes]]
 
 ## localhost-ports
-- status: seed
+- status: practicing
 - depends-on: nodejs
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- introduced: 2026-08-06
+- last-reviewed: 2026-08-06
+- evidence: chose 3000 from a spec ("above 1024, 3000 is the Node convention") and wrote it into `app.listen` themselves. Asked what URL would reach the running server, answered `localhost:3000` unprompted. Then predicted `ERR_CONNECTION_REFUSED` after Ctrl+C and gave the mechanism, not just the symptom — "the server has stopped at the port and a connection is severed". Holds the fork: a reply you don't like (404) means look at your code, silence (connection refused) means look at whether the server is up. Met the port-as-numbered-door model and the below-1024-is-reserved rule, but has not yet hit a port collision (`EADDRINUSE`)
 
 ## fetch-api
 - status: seed
