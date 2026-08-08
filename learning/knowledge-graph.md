@@ -513,11 +513,11 @@
 - evidence: wrote `.container { max-width: 700px; margin: 0 auto; }` themselves from an explanation of the four box-model layers and the auto-margin centering mechanism, with no example rule to copy. Predicted "all the text on the page will be positioned in the center" — a real misconception, conflating box positioning with text alignment. Confirmed on refresh that the box shifted toward center while list bullets stayed flush left, and closed the gap themselves once asked to describe exactly what moved and what didn't → [[css-classes]]. 2026-08-08 (later): correctly predicted, unaided, what `padding: 15px; margin-bottom: 30px;` would do to `.section` — "space of 15px between the content and the [box edge], and a further 30px space between [this box] and the outside content below" — a clean padding-vs-margin distinction stated cold. Also self-directed: added `text-align: center;` to `.container`, saw it over-centered the content against the design intent from last lesson, reasoned out on their own that it wasn't part of the task, and removed it without prompting
 
 ## flexbox
-- status: seed
+- status: practicing
 - depends-on: box-model
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- introduced: 2026-08-08
+- last-reviewed: 2026-08-08
+- evidence: correctly predicted "probably nothing visible" from `display: flex` alone, given the input/button were already sitting side by side as inline-block elements — a fair prediction given what they knew. Then, unprompted, noticed a real subtle effect: the small whitespace-based gap between inline-block elements vanished once they became flex items. Correctly predicted `flex: 1` on the input would make it expand; was surprised by *how much* (claims all leftover space, not a modest bump), and initially expected the grown input to touch the button — then correctly re-applied the box-model distinction from task 3 themselves once asked, confirming the `margin-right: 8px` still held the gap regardless of the box's new size → [[box-model]]
 
 ## responsive-basics
 - status: seed
