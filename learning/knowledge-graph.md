@@ -527,11 +527,11 @@
 - evidence: —
 
 ## colour-and-typography
-- status: seed
+- status: practicing
 - depends-on: css-basics
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- introduced: 2026-08-08
+- last-reviewed: 2026-08-08
+- evidence: chose a 3-colour palette (background/text/accent) and correctly predicted that `body { background-color; color; }` would only change elements without their own more-specific colour rule ("the background and colour of elements not already set will change") — cascade/specificity reasoning stated cold, unprompted. Met grouped selectors (`h1, h2 { ... }`, comma = apply to both independently) immediately after learning descendant selectors (space = "inside") in the prior task, and correctly distinguished the two without mixing them up. Correctly predicted the solid-fill button restyle (background-color + light text, border removed) before running it. Palette was revised mid-task after pasting in an external source's design tokens; re-applied the same rules with new hex values with no re-explanation needed → [[css-classes]], [[box-model]]
 
 ## ui-polish
 - status: seed

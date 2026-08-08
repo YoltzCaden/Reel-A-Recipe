@@ -23,6 +23,16 @@ A personal cooking app: build a recipe box of recipes you know (with their ingre
 - UK ingredient-substitute finder
 - Recipe importing/scraping from links or Instagram
 
+## Design
+### Colour palette (locked, Section 5)
+- Background (`Ground`) — `#f3f2f2`, warm near-white
+- Text (`Ink`) — `#201e1d`, near-black, used for all type and rule lines
+- Accent — `#ec3013`, hot red, used sparingly: primary buttons, headings, anything meant to draw the eye
+
+### Parked from the same source palette (not used yet)
+- Neutrals — a 100–900 grey ramp, for secondary copy, unfilled chips, and hairline row rules. Comes due if/when the UI grows secondary text or chip-style tags.
+- Scan overlay — `#111010`, a dark surface meant to make a camera view read as a distinct mode. Comes due only if a scan-to-add feature (e.g. scanning a receipt or pantry item) gets built — not currently in the MVP or parking lot.
+
 ## The trunk — core components
 ### Source control (Git)
 The save-and-undo system professionals use. Every change gets a checkpoint you can return to — used from day one, before there's even an app.
