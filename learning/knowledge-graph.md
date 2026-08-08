@@ -503,14 +503,14 @@
 - depends-on: css-basics, html-attributes
 - introduced: 2026-08-08
 - last-reviewed: 2026-08-08
-- evidence: asked to distinguish `class` from `id` cold (no example given), and gave a complete, correct answer unprompted — "id is an identity where no one can share the same identity, whereas a class is grouping multiple entities together and there can be many classes with the same name." Then wrote `class="container"` onto a wrapping `<div>` in index.html themselves, correctly using `.container` (dot prefix) as the CSS selector with no example to copy
+- evidence: asked to distinguish `class` from `id` cold (no example given), and gave a complete, correct answer unprompted — "id is an identity where no one can share the same identity, whereas a class is grouping multiple entities together and there can be many classes with the same name." Then wrote `class="container"` onto a wrapping `<div>` in index.html themselves, correctly using `.container` (dot prefix) as the CSS selector with no example to copy. 2026-08-08 (later): wrote two more `.section` divs to group the recipe and pantry blocks, reusing the same class name deliberately on both (the "many classes can share a name" idea, applied rather than just stated). First attempt misplaced the div boundaries — `recipe-list` landed in the wrong section, then a self-closed `<div class="section"></div>` briefly orphaned the pantry content — but self-corrected both after being asked to compare their code against the spec, without being told the fix directly
 
 ## box-model
 - status: practicing
 - depends-on: css-basics
 - introduced: 2026-08-08
 - last-reviewed: 2026-08-08
-- evidence: wrote `.container { max-width: 700px; margin: 0 auto; }` themselves from an explanation of the four box-model layers and the auto-margin centering mechanism, with no example rule to copy. Predicted "all the text on the page will be positioned in the center" — a real misconception, conflating box positioning with text alignment. Confirmed on refresh that the box shifted toward center while list bullets stayed flush left, and closed the gap themselves once asked to describe exactly what moved and what didn't → [[css-classes]]
+- evidence: wrote `.container { max-width: 700px; margin: 0 auto; }` themselves from an explanation of the four box-model layers and the auto-margin centering mechanism, with no example rule to copy. Predicted "all the text on the page will be positioned in the center" — a real misconception, conflating box positioning with text alignment. Confirmed on refresh that the box shifted toward center while list bullets stayed flush left, and closed the gap themselves once asked to describe exactly what moved and what didn't → [[css-classes]]. 2026-08-08 (later): correctly predicted, unaided, what `padding: 15px; margin-bottom: 30px;` would do to `.section` — "space of 15px between the content and the [box edge], and a further 30px space between [this box] and the outside content below" — a clean padding-vs-margin distinction stated cold. Also self-directed: added `text-align: center;` to `.container`, saw it over-centered the content against the design intent from last lesson, reasoned out on their own that it wasn't part of the task, and removed it without prompting
 
 ## flexbox
 - status: seed
