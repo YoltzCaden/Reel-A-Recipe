@@ -520,11 +520,11 @@
 - evidence: correctly predicted "probably nothing visible" from `display: flex` alone, given the input/button were already sitting side by side as inline-block elements — a fair prediction given what they knew. Then, unprompted, noticed a real subtle effect: the small whitespace-based gap between inline-block elements vanished once they became flex items. Correctly predicted `flex: 1` on the input would make it expand; was surprised by *how much* (claims all leftover space, not a modest bump), and initially expected the grown input to touch the button — then correctly re-applied the box-model distinction from task 3 themselves once asked, confirming the `margin-right: 8px` still held the gap regardless of the box's new size → [[box-model]]
 
 ## responsive-basics
-- status: seed
+- status: practicing
 - depends-on: flexbox
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- introduced: 2026-08-08
+- last-reviewed: 2026-08-08
+- evidence: diagnosed the actual phone-width problem themselves before any CSS was written — described the content sitting flush against the screen edge and traced it correctly to `.container` having no framing margin once it's narrower than its `max-width`. Wrote a `@media (max-width: 480px) { .container { padding: 0 15px; } }` block from a spec, and correctly predicted the query's scoping — phone view gets the padding, desktop view is unaffected — before running it. Also raised a real misconception (dev tools' emulator making text look smaller than it would on an actual phone, due to viewing a small CSS-pixel rectangle at monitor distance rather than phone distance/density) and, once the mechanism was explained, chose not to "fix" the non-issue with an unnecessary font-size bump — good calibration on when a change is actually warranted
 
 ## colour-and-typography
 - status: practicing

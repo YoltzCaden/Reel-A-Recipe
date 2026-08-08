@@ -54,7 +54,7 @@
 - [x] Repeat the pattern for pantry, from memory
 - [x] Commit the change to git
 
-### 5. Making it look like a real app  [ ] not started
+### 5. Making it look like a real app  [x] complete
 **Deliverable:** The page has a proper centred layout, styled forms and lists, a consistent colour palette, and holds up at phone width.
 **Concepts:** css-classes, box-model, flexbox, responsive-basics, colour-and-typography
 
@@ -63,7 +63,7 @@
 - [x] Style the forms and their inputs/buttons (borders, padding, spacing) using classes
 - [x] Pick a small colour palette and apply it consistently to headings, buttons, and backgrounds
 - [x] Use flexbox to lay an input and its button out side by side
-- [ ] Add a media query so the layout holds up at phone width
+- [x] Add a media query so the layout holds up at phone width
 
 ### 6. Remembering things  [ ] not started
 **Deliverable:** Recipes and pantry items are saved in PostgreSQL and survive a refresh or server restart.
