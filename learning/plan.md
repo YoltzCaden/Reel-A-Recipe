@@ -60,7 +60,7 @@
 
 - [x] Wrap the page content in a container `<div>`, give it a class, and style it (max-width, centred margin) so the page stops stretching edge to edge
 - [x] Add classes to the recipe and pantry sections and space them apart with box-model properties (padding/margin)
-- [ ] Style the forms and their inputs/buttons (borders, padding, spacing) using classes
+- [x] Style the forms and their inputs/buttons (borders, padding, spacing) using classes
 - [ ] Pick a small colour palette and apply it consistently to headings, buttons, and backgrounds
 - [ ] Use flexbox to lay an input and its button out side by side
 - [ ] Add a media query so the layout holds up at phone width
