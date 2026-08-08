@@ -44,7 +44,7 @@
 - [x] Add a route that responds with text, and visit it in the browser
 - [x] Commit the server to git
 
-### 4. Frontend talks to the server  [ ] not started
+### 4. Frontend talks to the server  [x] complete
 **Deliverable:** The page fetches recipe data from the Express server instead of using hardcoded JS.
 **Concepts:** fetch-api, json, async-await
 
@@ -52,11 +52,18 @@
 - [x] Predict what visiting that route in the browser will show, then check
 - [x] In `app.js`, replace the hardcoded `recipes` array with a `fetch()` call to the new route, and render the list from the response
 - [x] Repeat the pattern for pantry, from memory
-- [ ] Commit the change to git
+- [x] Commit the change to git
 
 ### 5. Making it look like a real app  [ ] not started
 **Deliverable:** The page has a proper centred layout, styled forms and lists, a consistent colour palette, and holds up at phone width.
 **Concepts:** css-classes, box-model, flexbox, responsive-basics, colour-and-typography
+
+- [x] Wrap the page content in a container `<div>`, give it a class, and style it (max-width, centred margin) so the page stops stretching edge to edge
+- [ ] Add classes to the recipe and pantry sections and space them apart with box-model properties (padding/margin)
+- [ ] Style the forms and their inputs/buttons (borders, padding, spacing) using classes
+- [ ] Pick a small colour palette and apply it consistently to headings, buttons, and backgrounds
+- [ ] Use flexbox to lay an input and its button out side by side
+- [ ] Add a media query so the layout holds up at phone width
 
 ### 6. Remembering things  [ ] not started
 **Deliverable:** Recipes and pantry items are saved in PostgreSQL and survive a refresh or server restart.

@@ -499,18 +499,18 @@
 - evidence: located where a script stopped executing by reasoning about which effects had and hadn't happened, rather than by reading the stack trace. That is real debugging reasoning, but it was a break I set up deliberately with a prediction asked for in advance — they have not yet diagnosed a bug they didn't know was coming. See [[js-runtime-errors]]. 2026-08-05 (later): predicted the exact failure of their own half-finished rename before running it, and learned that four broken call sites produce one error at a time because the script halts at the first — so "fix, refresh, repeat" is the expected workflow, not a sign of going in circles. 2026-08-06 (later): **the standing debt on this concept is paid** — diagnosed and fixed a failure nobody had set up for them and nobody had warned them about, silently, mid-lesson. Saved a correct route, saw the browser not change, and restarted the server on their own initiative. The fix came before the explanation, which is the normal order for real debugging → [[server-restart-required]]. 2026-08-06: read an npm EJSONPARSE error they had not seen before and located the real cause a line above where the error pointed, reasoning it out rather than being told → [[syntax-vs-runtime-errors]]
 
 ## css-classes
-- status: seed
+- status: practicing
 - depends-on: css-basics, html-attributes
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- introduced: 2026-08-08
+- last-reviewed: 2026-08-08
+- evidence: asked to distinguish `class` from `id` cold (no example given), and gave a complete, correct answer unprompted — "id is an identity where no one can share the same identity, whereas a class is grouping multiple entities together and there can be many classes with the same name." Then wrote `class="container"` onto a wrapping `<div>` in index.html themselves, correctly using `.container` (dot prefix) as the CSS selector with no example to copy
 
 ## box-model
-- status: seed
+- status: practicing
 - depends-on: css-basics
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- introduced: 2026-08-08
+- last-reviewed: 2026-08-08
+- evidence: wrote `.container { max-width: 700px; margin: 0 auto; }` themselves from an explanation of the four box-model layers and the auto-margin centering mechanism, with no example rule to copy. Predicted "all the text on the page will be positioned in the center" — a real misconception, conflating box positioning with text alignment. Confirmed on refresh that the box shifted toward center while list bullets stayed flush left, and closed the gap themselves once asked to describe exactly what moved and what didn't → [[css-classes]]
 
 ## flexbox
 - status: seed
