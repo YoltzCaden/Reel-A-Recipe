@@ -8,7 +8,7 @@
 - depends-on: none
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: correctly predicted git status output before running it, correctly distinguished tracked/modified vs untracked files, reasoned that README/learning/.claude deserved separate commits rather than being bundled with the page files, correctly predicted staged and post-commit git status output, wrote a descriptive commit message from scratch, and after an initial "not sure" on git log, correctly reasoned out that it would show message + author, then confirmed the actual hash/date/message output. Immediately after, independently repeated the add-then-commit workflow unprompted for a second, unrelated group of files (docs + tool config), correctly distinguishing the two categories after one refresher on .claude/. Later that day, ran the full stage-and-commit cycle twice more with no command dictated beyond `git add`, writing both messages themselves ("Add simple JS print message", "Add learning docs and docs for Claude") and keeping app code separate from notes/config. Later: spotted independently that local commits and the GitHub remote are not the same thing — see [[git-remotes]]. 2026-08-06: predicted `git status` correctly twice in one lesson, before and after adding a `.gitignore`, and distinguished untracked from modified without prompting. Wrote both of the day's commit messages themselves → [[gitignore]]
+- evidence: correctly predicted git status output before running it, correctly distinguished tracked/modified vs untracked files, reasoned that README/learning/.claude deserved separate commits rather than being bundled with the page files, correctly predicted staged and post-commit git status output, wrote a descriptive commit message from scratch, and after an initial "not sure" on git log, correctly reasoned out that it would show message + author, then confirmed the actual hash/date/message output. Immediately after, independently repeated the add-then-commit workflow unprompted for a second, unrelated group of files (docs + tool config), correctly distinguishing the two categories after one refresher on .claude/. Later that day, ran the full stage-and-commit cycle twice more with no command dictated beyond `git add`, writing both messages themselves ("Add simple JS print message", "Add learning docs and docs for Claude") and keeping app code separate from notes/config. Later: spotted independently that local commits and the GitHub remote are not the same thing — see [[git-remotes]]. 2026-08-06: predicted `git status` correctly twice in one lesson, before and after adding a `.gitignore`, and distinguished untracked from modified without prompting. Wrote both of the day's commit messages themselves → [[gitignore]]. 2026-08-11: independently reasoned out, unprompted, that a plaintext password shouldn't be pushed even though it's only local for now, and correctly distinguished `git commit` (local only) from `git push` (public) without being told — asked *before* pushing rather than after. Then, after running `git add -A` on a hardcoded secret and wanting to undo it, correctly predicted that `git reset` would unstage everything back to "modified"/"untracked" with nothing lost, and confirmed it
 
 ## frontend-ui
 - status: introduced
@@ -267,7 +267,7 @@
 - depends-on: javascript
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: correctly predicted `testList[1]` returns "b", showing they already had zero-indexing. Wrote `const recipes = [...]` as an array literal unaided. Reasoned out unprompted that a recipe added through the form would NOT be in the array, and gave the right reason — addRecipe only touches the page. Wrote `recipes.push(input.value)` from the method name alone, and correctly predicted the console would show four items afterwards. Has only met arrays of strings; objects not yet introduced despite the concept name
+- evidence: correctly predicted `testList[1]` returns "b", showing they already had zero-indexing. Wrote `const recipes = [...]` as an array literal unaided. Reasoned out unprompted that a recipe added through the form would NOT be in the array, and gave the right reason — addRecipe only touches the page. Wrote `recipes.push(input.value)` from the method name alone, and correctly predicted the console would show four items afterwards. Has only met arrays of strings; objects not yet introduced despite the concept name. 2026-08-11: met their first real JS object — a `{ key: value, ... }` connection-config literal in `db-test.js` — and confirmed understanding cold, unprompted: "that makes perfect sense"
 
 ## html-lists
 - status: understood
@@ -288,7 +288,7 @@
 - depends-on: js-runtime-errors
 - introduced: 2026-08-06
 - last-reviewed: 2026-08-06
-- evidence: met the split by running their own two files through Node — `app.js` parsed fine and died at `document` with a ReferenceError (failed *while running*), `index.html` never parsed at all and died with a SyntaxError (failed *while reading*). Predicted the `index.html` SyntaxError before running it. Then transferred the distinction unaided to a third case: asked whether a missing comma in package.json would fail like the ReferenceError or the SyntaxError, chose SyntaxError with the correct reason — "because the file cannot be read". Also worked out unprompted why a parse error names the line *after* the mistake ("it kept reading until it found something wrong"), and met the rule: a parser reports where it noticed, not where you erred — when the flagged line looks fine, check the line above → [[json]], [[stack-traces]]
+- evidence: met the split by running their own two files through Node — `app.js` parsed fine and died at `document` with a ReferenceError (failed *while running*), `index.html` never parsed at all and died with a SyntaxError (failed *while reading*). Predicted the `index.html` SyntaxError before running it. Then transferred the distinction unaided to a third case: asked whether a missing comma in package.json would fail like the ReferenceError or the SyntaxError, chose SyntaxError with the correct reason — "because the file cannot be read". Also worked out unprompted why a parse error names the line *after* the mistake ("it kept reading until it found something wrong"), and met the rule: a parser reports where it noticed, not where you erred — when the flagged line looks fine, check the line above → [[json]], [[stack-traces]]. 2026-08-11: correctly predicted, cold, that a genuinely broken `db-test.js` would fail immediately with a syntax error before anything ran, then read the real `SyntaxError: missing ) after argument list` and, once shown that `.query()` expects a plain quoted string rather than bare SQL keywords, fixed it themselves and reran successfully — real errors, not a set-up break
 
 ## dependency-tree
 - status: practicing
@@ -401,11 +401,11 @@
 - evidence: first contact, via PostgreSQL's `systemctl start`/`systemctl status`. Correctly predicted `systemctl start postgresql` would print nothing (silent success) and that `systemctl status` would then report `active (running)` — both confirmed against real output, including reading a real process tree (`Main PID`, worker processes like the checkpointer and background writer) without prompting for what it meant
 
 ## postgres-roles-auth
-- status: introduced
+- status: practicing
 - depends-on: postgresql
 - introduced: 2026-08-11
 - last-reviewed: 2026-08-11
-- evidence: hit peer authentication live — ran bare `psql`, correctly predicted it would NOT connect before running it, then read the real error (`role "YoItzCaden" does not exist`) themselves. The mechanism (PostgreSQL matches your Linux username against a same-named database role) was explained, not retrieved, but the follow-up prediction — that `sudo -u postgres psql` would succeed by borrowing the one role that does exist — was correct and confirmed. Has not yet created a role of their own
+- evidence: hit peer authentication live — ran bare `psql`, correctly predicted it would NOT connect before running it, then read the real error (`role "YoItzCaden" does not exist`) themselves. The mechanism (PostgreSQL matches your Linux username against a same-named database role) was explained, not retrieved, but the follow-up prediction — that `sudo -u postgres psql` would succeed by borrowing the one role that does exist — was correct and confirmed. 2026-08-11 (later): created their own role (`CREATE ROLE reel_app WITH LOGIN PASSWORD ...`) and granted it database/table/sequence privileges, three separate `GRANT` statements, correctly predicting the confirmation output each time. Hit a genuine `pg_hba.conf` misconfiguration (host connections set to `ident`, which can never pass a password) — the diagnosis and fix (`scram-sha-256`) were explained, not derived, but every verification step around it (reading the file before/after, predicting `sed`/`reload` would print nothing, confirming the change landed) was theirs
 
 ## tables-schema
 - status: practicing
@@ -415,18 +415,18 @@
 - evidence: met the server → database → table hierarchy via analogy (a kitchen holding several recipe binders, each with its own tabs), then created a real database and switched into it with `\c`, correctly predicting the exact confirmation wording ("You are now connected to database..."). Read a real `\d recipes` schema dump and correctly reasoned out, from the `Default: nextval(...)` line alone, that `SERIAL` is shorthand PostgreSQL expands into a plain integer column plus a separate auto-incrementing sequence object — "SERIAL is a special type that is of the integer type that provides a default increment algorithm," close enough that only the "not a real stored type" nuance needed correcting. 2026-08-11 (later): built a second table, `pantry`, unaided and from memory, then correctly predicted the exact shape of its `\d pantry` output ("the same thing between the word 'recipe' swapped for 'pantry'") before running it. 2026-08-11 (later still): asked, unprompted, whether two tables could share a name, correctly predicted the exact error text (`relation "recipes" already exists`) before deliberately re-running `CREATE TABLE recipes`, and confirmed it verbatim — table names are unique per schema
 
 ## node-postgres-connection
-- status: seed
+- status: practicing
 - depends-on: postgresql, express
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- introduced: 2026-08-11
+- last-reviewed: 2026-08-11
+- evidence: installed `pg` via npm (14 packages, correctly predicted "fewer than Express"), then wrote a full `db-test.js` script — `require`-destructuring, a `new Client({...})` config object, `client.connect()`/`client.query()`/`client.end()` — from an explanation with only the query argument left as a gap. First attempt at the gap revealed a real misconception (wrote bare SQL keywords as if they were JS syntax: `client.query(FROM database, SELECT recipes)`); once shown that `.query()` just takes one quoted string, corrected it themselves to `client.query("SELECT * FROM recipes;")` and it worked. Hit and read two more real errors along the way — a `MODULE_NOT_FOUND` from a typo'd filename, and a genuine Node `SyntaxError` they'd correctly predicted before running. Got the final empty-array result and correctly reasoned out why: "There is nothing actually filled in the database table for recipes so nothing will show"
 
 ## environment-variables
-- status: seed
+- status: practicing
 - depends-on: none
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- introduced: 2026-08-11
+- last-reviewed: 2026-08-11
+- evidence: this whole concept was pulled forward by the learner's own initiative — they raised the "shouldn't push a hardcoded password" concern themselves, unprompted, before this task was even reached (→ [[source-control-git]]). Installed `dotenv` (correctly predicted "even less" than `pg`'s 14 packages, since it "does a single function" — confirmed at 1). Added `.env` to `.gitignore` before the file existed. Wrote a real `.env` file (`KEY=value` syntax) from a spec with no example to copy. Converted one `process.env.DB_USER` example themselves into three more (`password`, `host`, `database`, `port`) with zero mistakes. Correctly predicted `db-test.js` would still print `[]` after the swap, confirmed it worked, and correctly predicted `.env` would not appear in `git status` at all
 
 ## primary-keys
 - status: practicing

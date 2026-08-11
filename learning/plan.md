@@ -72,8 +72,8 @@
 - [x] Install PostgreSQL, start the service, and connect with `psql` to prove it's running
 - [x] Create a database and a `recipes` table by hand in `psql`, choosing columns/types and a primary key
 - [x] Repeat the pattern for a `pantry` table, from memory
-- [ ] Install `pg` (node-postgres) and write a small script that connects and runs one query
-- [ ] Move the connection details into an environment variable instead of hardcoding them, and keep them out of git
+- [x] Install `pg` (node-postgres) and write a small script that connects and runs one query
+- [x] Move the connection details into an environment variable instead of hardcoding them, and keep them out of git
 - [ ] Replace the `/recipes` route in `server.js` with a real database query
 - [ ] Repeat the pattern for `/pantry`, then wire both "Add" forms to insert into the database, from memory
 
