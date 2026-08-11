@@ -161,8 +161,8 @@
 - status: practicing
 - depends-on: js-objects-arrays, dom-create-append
 - introduced: 2026-08-05
-- last-reviewed: 2026-08-05
-- evidence: correctly predicted that adding the loop while the `<li>` tags were still hardcoded would render six recipes, each duplicated — the concrete cost of the same data living in two places. After emptying the `<ul>`, took the point that index.html now contains no recipes at all and the page is built from the array. Spotted unprompted that a pushed recipe vanishes on refresh, and connected it to the array being rebuilt from app.js on every load
+- last-reviewed: 2026-08-11
+- evidence: correctly predicted that adding the loop while the `<li>` tags were still hardcoded would render six recipes, each duplicated — the concrete cost of the same data living in two places. After emptying the `<ul>`, took the point that index.html now contains no recipes at all and the page is built from the array. Spotted unprompted that a pushed recipe vanishes on refresh, and connected it to the array being rebuilt from app.js on every load. 2026-08-11: after wiring `/recipes` to a real (empty) database table, correctly predicted the live page would show empty lists, and when asked to explain why after seeing it, gave the right reason cold — "this is because the database is empty" — rather than treating it as a bug
 
 ## js-runtime-errors
 - status: practicing
@@ -337,14 +337,14 @@
 - depends-on: js-functions, event-listeners
 - introduced: 2026-08-06
 - last-reviewed: 2026-08-06
-- evidence: generalised the pattern across two unrelated APIs. Having previously written the body of an `addEventListener` callback, wrote the body of the `app.listen` callback from the analogy alone — you hand a function over and something *else* decides when to call it. Understood why the "server is running" message belongs inside the function rather than on the following line: Express calls it only once the server is genuinely accepting connections. Has still not written the `function () { ... }` wrapper itself from scratch — all three times it was given. 2026-08-06 (later): met the third instance of the pattern in `app.get`, and the distinction that matters — `app.listen`'s callback runs once at startup, `app.get`'s runs every time a matching request arrives
+- evidence: generalised the pattern across two unrelated APIs. Having previously written the body of an `addEventListener` callback, wrote the body of the `app.listen` callback from the analogy alone — you hand a function over and something *else* decides when to call it. Understood why the "server is running" message belongs inside the function rather than on the following line: Express calls it only once the server is genuinely accepting connections. Has still not written the `function () { ... }` wrapper itself from scratch — all three times it was given. 2026-08-06 (later): met the third instance of the pattern in `app.get`, and the distinction that matters — `app.listen`'s callback runs once at startup, `app.get`'s runs every time a matching request arrives. 2026-08-11: applied that distinction to solve a real design problem — had written a run-once `main()` (borrowed from `db-test.js`) to query the database, and correctly retrieved, when asked, that `app.get`'s callback (unlike `app.listen`'s) runs on every request — landing on "so that's where `pool.query(...)` belongs" themselves
 
 ## long-running-processes
 - status: practicing
 - depends-on: nodejs, localhost-ports
 - introduced: 2026-08-06
 - last-reviewed: 2026-08-06
-- evidence: asked whether the shell prompt would come back after `node server.js`, answered no and gave the reason plus the escape hatch unprompted — "the server will be running, like a process in a terminal for which i have to ctrl+c to shut it down". Holds the contrast with every previous Node run, which reached the end of the file and exited; `listen` keeps the process alive waiting for connections
+- evidence: asked whether the shell prompt would come back after `node server.js`, answered no and gave the reason plus the escape hatch unprompted — "the server will be running, like a process in a terminal for which i have to ctrl+c to shut it down". Holds the contrast with every previous Node run, which reached the end of the file and exited; `listen` keeps the process alive waiting for connections. 2026-08-11: correctly reasoned that a `Pool` needs to stay open for the server's entire lifetime, never closed during normal operation — the flip side of the same idea, applied to a database connection instead of the HTTP listener
 
 ## http-request-response
 - status: practicing
@@ -419,7 +419,7 @@
 - depends-on: postgresql, express
 - introduced: 2026-08-11
 - last-reviewed: 2026-08-11
-- evidence: installed `pg` via npm (14 packages, correctly predicted "fewer than Express"), then wrote a full `db-test.js` script — `require`-destructuring, a `new Client({...})` config object, `client.connect()`/`client.query()`/`client.end()` — from an explanation with only the query argument left as a gap. First attempt at the gap revealed a real misconception (wrote bare SQL keywords as if they were JS syntax: `client.query(FROM database, SELECT recipes)`); once shown that `.query()` just takes one quoted string, corrected it themselves to `client.query("SELECT * FROM recipes;")` and it worked. Hit and read two more real errors along the way — a `MODULE_NOT_FOUND` from a typo'd filename, and a genuine Node `SyntaxError` they'd correctly predicted before running. Got the final empty-array result and correctly reasoned out why: "There is nothing actually filled in the database table for recipes so nothing will show"
+- evidence: installed `pg` via npm (14 packages, correctly predicted "fewer than Express"), then wrote a full `db-test.js` script — `require`-destructuring, a `new Client({...})` config object, `client.connect()`/`client.query()`/`client.end()` — from an explanation with only the query argument left as a gap. First attempt at the gap revealed a real misconception (wrote bare SQL keywords as if they were JS syntax: `client.query(FROM database, SELECT recipes)`); once shown that `.query()` just takes one quoted string, corrected it themselves to `client.query("SELECT * FROM recipes;")` and it worked. Hit and read two more real errors along the way — a `MODULE_NOT_FOUND` from a typo'd filename, and a genuine Node `SyntaxError` they'd correctly predicted before running. Got the final empty-array result and correctly reasoned out why: "There is nothing actually filled in the database table for recipes so nothing will show". 2026-08-11 (later): wired `server.js`'s `/recipes` route to a real `Pool` — correctly reasoned through why `Client` (one-off script) and `Pool` (long-running server) are different tools before writing either. Wrote the `Pool` config from memory (same shape as `db-test.js`'s `Client`). Independently converted `/pantry` to match, unprompted — a head start on the next task — but left off `async` on that handler; caught the mistake themselves via side-by-side comparison, correctly predicted the exact failure (`await` outside `async`) before being told, then fixed it and confirmed both routes work live against the real (currently empty) tables
 
 ## environment-variables
 - status: practicing
