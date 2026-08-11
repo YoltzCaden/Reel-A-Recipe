@@ -391,7 +391,7 @@
 - depends-on: postgresql
 - introduced: 2026-08-11
 - last-reviewed: 2026-08-11
-- evidence: met SQL syntax conventions (semicolon-terminated statements, ALL CAPS keywords) via `CREATE DATABASE reel_a_recipe;`, and correctly predicted psql's confirmation style after seeing it once — predicted `CREATE TABLE` cold, unprompted, by pattern-matching against the earlier `CREATE DATABASE` echo. Wrote a real `CREATE TABLE recipes (id SERIAL PRIMARY KEY, name TEXT NOT NULL);` statement from a spec with no example to copy
+- evidence: met SQL syntax conventions (semicolon-terminated statements, ALL CAPS keywords) via `CREATE DATABASE reel_a_recipe;`, and correctly predicted psql's confirmation style after seeing it once — predicted `CREATE TABLE` cold, unprompted, by pattern-matching against the earlier `CREATE DATABASE` echo. Wrote a real `CREATE TABLE recipes (id SERIAL PRIMARY KEY, name TEXT NOT NULL);` statement from a spec with no example to copy. 2026-08-11 (later): repeated the full multi-line `CREATE TABLE` statement for `pantry` entirely from memory, no spec given, correct syntax first time
 
 ## linux-services
 - status: practicing
@@ -412,7 +412,7 @@
 - depends-on: postgresql
 - introduced: 2026-08-11
 - last-reviewed: 2026-08-11
-- evidence: met the server → database → table hierarchy via analogy (a kitchen holding several recipe binders, each with its own tabs), then created a real database and switched into it with `\c`, correctly predicting the exact confirmation wording ("You are now connected to database..."). Read a real `\d recipes` schema dump and correctly reasoned out, from the `Default: nextval(...)` line alone, that `SERIAL` is shorthand PostgreSQL expands into a plain integer column plus a separate auto-incrementing sequence object — "SERIAL is a special type that is of the integer type that provides a default increment algorithm," close enough that only the "not a real stored type" nuance needed correcting
+- evidence: met the server → database → table hierarchy via analogy (a kitchen holding several recipe binders, each with its own tabs), then created a real database and switched into it with `\c`, correctly predicting the exact confirmation wording ("You are now connected to database..."). Read a real `\d recipes` schema dump and correctly reasoned out, from the `Default: nextval(...)` line alone, that `SERIAL` is shorthand PostgreSQL expands into a plain integer column plus a separate auto-incrementing sequence object — "SERIAL is a special type that is of the integer type that provides a default increment algorithm," close enough that only the "not a real stored type" nuance needed correcting. 2026-08-11 (later): built a second table, `pantry`, unaided and from memory, then correctly predicted the exact shape of its `\d pantry` output ("the same thing between the word 'recipe' swapped for 'pantry'") before running it. 2026-08-11 (later still): asked, unprompted, whether two tables could share a name, correctly predicted the exact error text (`relation "recipes" already exists`) before deliberately re-running `CREATE TABLE recipes`, and confirmed it verbatim — table names are unique per schema
 
 ## node-postgres-connection
 - status: seed
