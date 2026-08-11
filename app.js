@@ -32,7 +32,7 @@ async function loadRecipes() {
     recipes = await response.json();
 
     for (const recipe of recipes) {
-        addItem(recipe, recipeList);
+        addItem(recipe.name, recipeList);
     }
 
 }
@@ -44,7 +44,7 @@ async function loadPantry() {
     pantry = await response.json();
 
     for (const item of pantry) {
-        addItem(item, pantryList);
+        addItem(item.name, pantryList);
     }
 
 }
@@ -52,18 +52,26 @@ async function loadPantry() {
 loadPantry();
 
 // When the form is submitted, run this function.
-recipeForm.addEventListener("submit", function (event) {
+recipeForm.addEventListener("submit", async function (event) {
   event.preventDefault();
-  recipes.push(recipeInput.value);
+  await fetch("/recipes", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name: recipeInput.value }),
+  });
   addItem(recipeInput.value, recipeList);
 
   recipeInput.value = "";
 
 });
 
-pantryForm.addEventListener("submit", function(event) {
+pantryForm.addEventListener("submit", async function(event) {
     event.preventDefault();
-    pantry.push(pantryInput.value);
+    await fetch("/pantry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: pantryInput.value }),
+    });
     addItem(pantryInput.value, pantryList);
     pantryInput.value = "";
 });

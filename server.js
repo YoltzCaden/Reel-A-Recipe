@@ -14,6 +14,7 @@ const pool = new Pool({
 });
 
 app.use(express.static(__dirname));
+app.use(express.json());
 
 // const recipes = ["Egg Fried Rice", "Mince on Bread", "Chicken Stir Fry"];
 // const pantry = ["Onions", "Rice", "Eggs", "Bread", "Mince", "Chicken"];
@@ -23,10 +24,23 @@ app.get("/recipes", async function (request, response) {
     response.json(result.rows);
 });
 
+
+app.post("/recipes", async function (request, response) {
+    let name = request.body.name;
+    const result = await pool.query("INSERT INTO recipes (name) VALUES ($1);", [name]);
+    response.sendStatus(201);
+});
+
 app.get("/pantry", async function(request, response) {
     const result = await pool.query("SELECT * FROM pantry;");
     response.json(result.rows);
 
+});
+
+app.post("/pantry", async function (request, response) {
+    let name = request.body.name;
+    const result = await pool.query("INSERT INTO pantry (name) VALUES ($1);", [name]);
+    response.sendStatus(201);
 });
 
 app.listen(3000, function () {
