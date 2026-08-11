@@ -387,11 +387,11 @@
 - evidence: met `async function` and `await` via the fetch analogy (network requests take real time, `await` pauses just that function rather than freezing the page). The first instance, `loadRecipes()`, was written for them. Then, unprompted and from memory, wrote a second instance — `loadPantry()` — reproducing the full `async function` / `await fetch(...)` / `await response.json()` shape correctly with no example on screen at the time. Predicted correctly (pantry list would stay empty) that the function existed but was never called, then wired up the missing `loadPantry();` call themselves and confirmed both lists populated from the server on refresh
 
 ## sql-basics
-- status: seed
+- status: practicing
 - depends-on: postgresql
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- introduced: 2026-08-11
+- last-reviewed: 2026-08-11
+- evidence: met SQL syntax conventions (semicolon-terminated statements, ALL CAPS keywords) via `CREATE DATABASE reel_a_recipe;`, and correctly predicted psql's confirmation style after seeing it once — predicted `CREATE TABLE` cold, unprompted, by pattern-matching against the earlier `CREATE DATABASE` echo. Wrote a real `CREATE TABLE recipes (id SERIAL PRIMARY KEY, name TEXT NOT NULL);` statement from a spec with no example to copy
 
 ## linux-services
 - status: practicing
@@ -408,11 +408,11 @@
 - evidence: hit peer authentication live — ran bare `psql`, correctly predicted it would NOT connect before running it, then read the real error (`role "YoItzCaden" does not exist`) themselves. The mechanism (PostgreSQL matches your Linux username against a same-named database role) was explained, not retrieved, but the follow-up prediction — that `sudo -u postgres psql` would succeed by borrowing the one role that does exist — was correct and confirmed. Has not yet created a role of their own
 
 ## tables-schema
-- status: seed
+- status: practicing
 - depends-on: postgresql
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- introduced: 2026-08-11
+- last-reviewed: 2026-08-11
+- evidence: met the server → database → table hierarchy via analogy (a kitchen holding several recipe binders, each with its own tabs), then created a real database and switched into it with `\c`, correctly predicting the exact confirmation wording ("You are now connected to database..."). Read a real `\d recipes` schema dump and correctly reasoned out, from the `Default: nextval(...)` line alone, that `SERIAL` is shorthand PostgreSQL expands into a plain integer column plus a separate auto-incrementing sequence object — "SERIAL is a special type that is of the integer type that provides a default increment algorithm," close enough that only the "not a real stored type" nuance needed correcting
 
 ## node-postgres-connection
 - status: seed
@@ -429,11 +429,11 @@
 - evidence: —
 
 ## primary-keys
-- status: seed
+- status: practicing
 - depends-on: tables-schema
-- introduced: —
-- last-reviewed: —
-- evidence: —
+- introduced: 2026-08-11
+- last-reviewed: 2026-08-11
+- evidence: given the definition (one column guaranteed to uniquely identify every row) and the `SERIAL` auto-increment shortcut, wrote `id SERIAL PRIMARY KEY` themselves as part of a real `CREATE TABLE` statement with no example to copy. Saw the resulting `\d recipes` output confirm it as `"recipes_pkey" PRIMARY KEY, btree (id)` and was told (not yet self-derived) that a primary key automatically builds a lookup index
 
 ## relational-joins
 - status: seed
