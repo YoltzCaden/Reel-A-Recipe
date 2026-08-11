@@ -69,6 +69,14 @@
 **Deliverable:** Recipes and pantry items are saved in PostgreSQL and survive a refresh or server restart.
 **Concepts:** sql-basics, tables-schema, node-postgres-connection, environment-variables, primary-keys
 
+- [x] Install PostgreSQL, start the service, and connect with `psql` to prove it's running
+- [ ] Create a database and a `recipes` table by hand in `psql`, choosing columns/types and a primary key
+- [ ] Repeat the pattern for a `pantry` table, from memory
+- [ ] Install `pg` (node-postgres) and write a small script that connects and runs one query
+- [ ] Move the connection details into an environment variable instead of hardcoding them, and keep them out of git
+- [ ] Replace the `/recipes` route in `server.js` with a real database query
+- [ ] Repeat the pattern for `/pantry`, then wire both "Add" forms to insert into the database, from memory
+
 ### 7. The core feature  [ ] not started
 **Deliverable:** The app shows which saved recipes you can make right now from your pantry, and builds a shopping list of missing ingredients for a chosen recipe.
 **Concepts:** relational-joins, many-to-many-relationships, backend-business-logic

@@ -81,11 +81,11 @@
 - evidence: locked as frontend approach; existing coursework exposure
 
 ## postgresql
-- status: introduced
+- status: practicing
 - depends-on: database-concept
 - introduced: 2026-08-04
-- last-reviewed: 2026-08-04
-- evidence: same relational-mapping explanation as database-concept
+- last-reviewed: 2026-08-11
+- evidence: same relational-mapping explanation as database-concept. 2026-08-11: installed `postgresql-server`/`postgresql-contrib` via dnf, correctly predicted `psql --version` would print a version string by analogy with `node --version` (close: guessed 16.x, got 18.3). Predicted `postgresql-setup --initdb` would "turn on the database connection" — wrong — then, shown the real output (only file/log creation, nothing about a connection), self-corrected unprompted: "it only initialise and set up files and folders for the database". Correctly predicted `systemctl start postgresql` would print nothing, and that `systemctl status` afterward would show `active (running)`; both confirmed. Correctly predicted bare `psql` would fail to connect, then read the real error (`role "YoItzCaden" does not exist`) and connected successfully once shown `sudo -u postgres psql` → [[linux-services]], [[postgres-roles-auth]]
 
 ## render
 - status: introduced
@@ -190,7 +190,7 @@
 - depends-on: none
 - introduced: 2026-08-05
 - last-reviewed: 2026-08-05
-- evidence: asked to install two named packages, correctly predicted dnf would list more than two — "since they will have dependencies" — and saw seven. Read the transaction summary with help: noticed `nodejs24-bin` is 154 KiB while the real engine `nodejs24-libs` is 62.8 MiB, and met "weak dependencies" as optional extras. Also met the `[y/N]` capital-letter-is-the-default convention. Comes due again immediately in [[npm-package-json]], where npm does the same job for JavaScript libraries. 2026-08-06: met the second package manager, npm, and correctly deduced from memory of the dnf transaction that it had already arrived alongside Node. Met the scope distinction — dnf manages software for the whole machine, npm manages libraries for one project folder. 2026-08-06 (later): ran their first `npm install`. Predicted `node_modules/` would appear from prior exposure, and predicted unprompted that Express would arrive "with all the other packages express is dependent on, these are called dependencies" — using the term correctly and transferring the reasoning straight from the dnf transaction. Then went past the fact to the mechanism: after finding a `package.json` inside `node_modules/express`, explained without help how one request became 65 folders — "npm read express's package.json and installed its dependencies too" → [[dependency-tree]]
+- evidence: asked to install two named packages, correctly predicted dnf would list more than two — "since they will have dependencies" — and saw seven. Read the transaction summary with help: noticed `nodejs24-bin` is 154 KiB while the real engine `nodejs24-libs` is 62.8 MiB, and met "weak dependencies" as optional extras. Also met the `[y/N]` capital-letter-is-the-default convention. Comes due again immediately in [[npm-package-json]], where npm does the same job for JavaScript libraries. 2026-08-06: met the second package manager, npm, and correctly deduced from memory of the dnf transaction that it had already arrived alongside Node. Met the scope distinction — dnf manages software for the whole machine, npm manages libraries for one project folder. 2026-08-06 (later): ran their first `npm install`. Predicted `node_modules/` would appear from prior exposure, and predicted unprompted that Express would arrive "with all the other packages express is dependent on, these are called dependencies" — using the term correctly and transferring the reasoning straight from the dnf transaction. Then went past the fact to the mechanism: after finding a `package.json` inside `node_modules/express`, explained without help how one request became 65 folders — "npm read express's package.json and installed its dependencies too" → [[dependency-tree]]. 2026-08-11: hit a real, unplanned dnf failure (every mirror for the "updates" repo 404ing on the same file) while installing PostgreSQL. Correctly predicted a second identical run would get further before running it; the diagnosis that it was an upstream metadata problem, and the `--disablerepo=updates` workaround, were given rather than reasoned out. Confirmed the y/N install prompt from memory and completed the install once the workaround was in place
 
 ## js-undefined
 - status: introduced
@@ -392,6 +392,20 @@
 - introduced: —
 - last-reviewed: —
 - evidence: —
+
+## linux-services
+- status: practicing
+- depends-on: none
+- introduced: 2026-08-11
+- last-reviewed: 2026-08-11
+- evidence: first contact, via PostgreSQL's `systemctl start`/`systemctl status`. Correctly predicted `systemctl start postgresql` would print nothing (silent success) and that `systemctl status` would then report `active (running)` — both confirmed against real output, including reading a real process tree (`Main PID`, worker processes like the checkpointer and background writer) without prompting for what it meant
+
+## postgres-roles-auth
+- status: introduced
+- depends-on: postgresql
+- introduced: 2026-08-11
+- last-reviewed: 2026-08-11
+- evidence: hit peer authentication live — ran bare `psql`, correctly predicted it would NOT connect before running it, then read the real error (`role "YoItzCaden" does not exist`) themselves. The mechanism (PostgreSQL matches your Linux username against a same-named database role) was explained, not retrieved, but the follow-up prediction — that `sudo -u postgres psql` would succeed by borrowing the one role that does exist — was correct and confirmed. Has not yet created a role of their own
 
 ## tables-schema
 - status: seed
