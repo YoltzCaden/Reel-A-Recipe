@@ -65,7 +65,7 @@
 - [x] Use flexbox to lay an input and its button out side by side
 - [x] Add a media query so the layout holds up at phone width
 
-### 6. Remembering things  [ ] not started
+### 6. Remembering things  [x] complete
 **Deliverable:** Recipes and pantry items are saved in PostgreSQL and survive a refresh or server restart.
 **Concepts:** sql-basics, tables-schema, node-postgres-connection, environment-variables, primary-keys
 
@@ -75,8 +75,7 @@
 - [x] Install `pg` (node-postgres) and write a small script that connects and runs one query
 - [x] Move the connection details into an environment variable instead of hardcoding them, and keep them out of git
 - [x] Replace the `/recipes` route in `server.js` with a real database query
-- [ ] Repeat the pattern for `/pantry`, then wire both "Add" forms to insert into the database, from memory
-  (`/pantry`'s read side is already done, ahead of schedule — this task now just needs the two "Add" forms wired to INSERT)
+- [x] Repeat the pattern for `/pantry`, then wire both "Add" forms to insert into the database, from memory
 
 ### 7. The core feature  [ ] not started
 **Deliverable:** The app shows which saved recipes you can make right now from your pantry, and builds a shopping list of missing ingredients for a chosen recipe.
