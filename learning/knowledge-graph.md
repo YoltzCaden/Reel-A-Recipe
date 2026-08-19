@@ -315,8 +315,8 @@
 - status: practicing
 - depends-on: express, http-request-response
 - introduced: 2026-08-06
-- last-reviewed: 2026-08-11
-- evidence: met routes as the thing Express exists to provide, and diagnosed their absence from a real 404 — "it doesn't have a route for /". Same day: wrote their first route. Given the shape `app.get(path, handler)` and told that `response.send()` replies, filled in both gaps themselves — read the path `/` off the `Cannot GET /` message rather than being told it, and wrote `response.send("Welcome to my Express server!")` with no example line to copy. Then predicted `Cannot GET /recipes` for an unregistered path and confirmed it, showing they hold that a route matches one specific path and nothing else. Has only written `app.get`; POST and other methods, route parameters, and `res.json` not yet introduced. 2026-08-06 (later): met `response.json()` as a sibling of `response.send()` — takes a JS value instead of a string, serializes it, and sets the content-type header. Wrote `app.get("/recipes", ...)` and `response.json(recipes)` themselves from an explanation and a `response.send` line to pattern-match against, no example of `response.json` itself to copy. 2026-08-06 (later): correctly predicted, before running, that visiting `/recipes` would show the array formatted as JSON. Restarted the server themselves (recalling `server-restart-required` unprompted) and confirmed the prediction against the real response. 2026-08-06 (later still): unprompted, added a `pantry` array and `app.get("/pantry", ...)` route to `server.js` from memory, correctly matching the `/recipes` pattern with no instruction to do so — a head start on task 4. 2026-08-11: met `app.post` for the first time, plus `express.json()` middleware and `request.body`. First attempt at `app.post("/recipes", ...)` declared params as `req, res` but used `request, response` inside the body — a real naming-mismatch bug; correctly predicted the exact failure (`ReferenceError: request is not defined`) once asked, then fixed it. Immediately after, wrote the equivalent `app.post("/pantry", ...)` entirely from memory with zero mistakes — correct naming, correct table, correct parameterized query
+- last-reviewed: 2026-08-19
+- evidence: met routes as the thing Express exists to provide, and diagnosed their absence from a real 404 — "it doesn't have a route for /". Same day: wrote their first route. Given the shape `app.get(path, handler)` and told that `response.send()` replies, filled in both gaps themselves — read the path `/` off the `Cannot GET /` message rather than being told it, and wrote `response.send("Welcome to my Express server!")` with no example line to copy. Then predicted `Cannot GET /recipes` for an unregistered path and confirmed it, showing they hold that a route matches one specific path and nothing else. Has only written `app.get`; POST and other methods, route parameters, and `res.json` not yet introduced. 2026-08-06 (later): met `response.json()` as a sibling of `response.send()` — takes a JS value instead of a string, serializes it, and sets the content-type header. Wrote `app.get("/recipes", ...)` and `response.json(recipes)` themselves from an explanation and a `response.send` line to pattern-match against, no example of `response.json` itself to copy. 2026-08-06 (later): correctly predicted, before running, that visiting `/recipes` would show the array formatted as JSON. Restarted the server themselves (recalling `server-restart-required` unprompted) and confirmed the prediction against the real response. 2026-08-06 (later still): unprompted, added a `pantry` array and `app.get("/pantry", ...)` route to `server.js` from memory, correctly matching the `/recipes` pattern with no instruction to do so — a head start on task 4. 2026-08-11: met `app.post` for the first time, plus `express.json()` middleware and `request.body`. First attempt at `app.post("/recipes", ...)` declared params as `req, res` but used `request, response` inside the body — a real naming-mismatch bug; correctly predicted the exact failure (`ReferenceError: request is not defined`) once asked, then fixed it. Immediately after, wrote the equivalent `app.post("/pantry", ...)` entirely from memory with zero mistakes — correct naming, correct table, correct parameterized query. 2026-08-19 review (8 days stale): asked cold what `app.get("/recipes", handler)` tells Express to do, answered correctly and cleanly — "when a GET request for /recipes comes do this action"
 
 ## server-restart-required
 - status: practicing
@@ -350,8 +350,8 @@
 - status: practicing
 - depends-on: nodejs, client-vs-server
 - introduced: 2026-08-06
-- last-reviewed: 2026-08-06
-- evidence: was told what `GET` and `/` mean in the message `Cannot GET /`, then supplied the conclusion themselves — "it doesn't have a route for /". Correctly separated the two failure modes by prediction: a 404 is the server *replying* that it has nothing for that URL, while `ERR_CONNECTION_REFUSED` is no reply at all. Took the point that a server sends only what it is told to send — `index.html` sat in the same folder and was not served. Has only met `GET`; other methods, status codes as numbers, and headers not yet introduced → [[express-routes]]. 2026-08-06 (later): met the request/response pair as the two arguments Express hands a route handler, and that nothing is sent to the browser until `response.send` is called. Then closed the loop they opened earlier — the same `Cannot GET` message they had diagnosed as a missing route was made to disappear by adding that route, and reappeared on a different path
+- last-reviewed: 2026-08-19
+- evidence: was told what `GET` and `/` mean in the message `Cannot GET /`, then supplied the conclusion themselves — "it doesn't have a route for /". Correctly separated the two failure modes by prediction: a 404 is the server *replying* that it has nothing for that URL, while `ERR_CONNECTION_REFUSED` is no reply at all. Took the point that a server sends only what it is told to send — `index.html` sat in the same folder and was not served. Has only met `GET`; other methods, status codes as numbers, and headers not yet introduced → [[express-routes]]. 2026-08-06 (later): met the request/response pair as the two arguments Express hands a route handler, and that nothing is sent to the browser until `response.send` is called. Then closed the loop they opened earlier — the same `Cannot GET` message they had diagnosed as a missing route was made to disappear by adding that route, and reappeared on a different path. 2026-08-14 review: asked to explain what a `DELETE` request is for compared to `GET`/`POST` — struggled, describing it as a GET-then-modify combination and guessing the method name was actually `PUT`. Refreshed on HTTP methods as independent single-verb instructions (`GET` reads, `POST` creates, `DELETE` removes) and that `PUT`/`PATCH` is the separate update method coming in Section 9, not today. 2026-08-19: gap closed — first predicted visiting `/recipes/3` in the browser address bar would trigger the delete, then corrected unaided once reminded the address bar only ever sends GET: "oh yes only the get request response saying, 'Cannot GET /recipes/3'"
 
 ## localhost-ports
 - status: practicing
@@ -397,8 +397,8 @@
 - status: practicing
 - depends-on: none
 - introduced: 2026-08-11
-- last-reviewed: 2026-08-11
-- evidence: first contact, via PostgreSQL's `systemctl start`/`systemctl status`. Correctly predicted `systemctl start postgresql` would print nothing (silent success) and that `systemctl status` would then report `active (running)` — both confirmed against real output, including reading a real process tree (`Main PID`, worker processes like the checkpointer and background writer) without prompting for what it meant
+- last-reviewed: 2026-08-19
+- evidence: first contact, via PostgreSQL's `systemctl start`/`systemctl status`. Correctly predicted `systemctl start postgresql` would print nothing (silent success) and that `systemctl status` would then report `active (running)` — both confirmed against real output, including reading a real process tree (`Main PID`, worker processes like the checkpointer and background writer) without prompting for what it meant. 2026-08-14: hit a genuine unset-up outage — `psql` failed with a missing-socket error, almost certainly because the machine restarted since the last lesson and the service never came back (it showed `disabled`, not just `inactive`). Jumped straight to "run `systemctl start`" before checking; agreed to confirm with `systemctl status` first, which showed `inactive (dead)`/`disabled`. Met the enable-vs-start distinction (start = running now only, enable = survives a reboot too — not yet run). Correctly predicted `systemctl start` would print nothing, then confirmed `active (running)`. 2026-08-19: same outage recurred (still not `enable`d, and the machine had been off) — correctly predicted silent output from `systemctl start postgresql` cold, no refresher needed, then read `active (running)` themselves from `systemctl status`
 
 ## postgres-roles-auth
 - status: practicing
@@ -434,6 +434,27 @@
 - introduced: 2026-08-11
 - last-reviewed: 2026-08-11
 - evidence: given the definition (one column guaranteed to uniquely identify every row) and the `SERIAL` auto-increment shortcut, wrote `id SERIAL PRIMARY KEY` themselves as part of a real `CREATE TABLE` statement with no example to copy. Saw the resulting `\d recipes` output confirm it as `"recipes_pkey" PRIMARY KEY, btree (id)` and was told (not yet self-derived) that a primary key automatically builds a lookup index
+
+## route-parameters
+- status: practicing
+- depends-on: express-routes
+- introduced: 2026-08-19
+- last-reviewed: 2026-08-19
+- evidence: had already written `app.delete("/recipes/:id", ...)` between sessions (confirmed themselves as their own work). First explanation of `:id` was a real misconception — called it a query string and expected an explicit `id=` pair somewhere in the URL. Given a neutral example (`/users/:name` matched against `/users/caden` → `request.params.name === "caden"`), correctly answered the applied case (`/recipes/:id` against `/recipes/7` → `request.params.id === "7"`) on the second try. Guided correction, not cold retrieval
+
+## sql-delete
+- status: practicing
+- depends-on: sql-basics, primary-keys
+- introduced: 2026-08-14
+- last-reviewed: 2026-08-19
+- evidence: introduced via a shown shape (`DELETE FROM table_name WHERE column = value;`) and the point that omitting `WHERE` deletes every row in the table. First prediction of the confirmation message pattern-matched `INSERT`'s two-number output (guessed `DELETE 0 3`) rather than reasoning about what each number meant; corrected once told `DELETE`'s confirmation is a single number. Wrote `DELETE FROM recipes WHERE id = 3;` themselves from the spec with no example to copy, ran it, correctly predicted `DELETE 1` the second time, and confirmed the row was actually gone via a follow-up `SELECT`. 2026-08-19: same statement reached through a real route (`app.delete("/recipes/:id", ...)` running a parameterized `DELETE FROM recipes WHERE id = $1`) instead of typed directly into `psql` — tested with `curl -X DELETE localhost:3000/recipes/1`, correctly predicted the empty response body, and confirmed the row gone via `GET /recipes` returning `[]` → [[route-parameters]]
+
+## sql-update
+- status: seed
+- depends-on: sql-basics, primary-keys
+- introduced: —
+- last-reviewed: —
+- evidence: —
 
 ## relational-joins
 - status: seed
@@ -475,7 +496,7 @@
 - depends-on: js-functions
 - introduced: —
 - last-reviewed: —
-- evidence: —
+- evidence: — (parked 2026-08-19: `DELETE /recipes/:id` calls `response.sendStatus(200)` unconditionally — an id that matches no row still gets a 200 "success". `result.rowCount` is sitting right there, assigned and unused. Named out loud, not built; comes due in Section 10)
 
 ## deployment-workflow
 - status: seed

@@ -77,18 +77,34 @@
 - [x] Replace the `/recipes` route in `server.js` with a real database query
 - [x] Repeat the pattern for `/pantry`, then wire both "Add" forms to insert into the database, from memory
 
-### 7. The core feature  [ ] not started
+### 7. Removing items  [ ] not started
+**Deliverable:** Clicking a checkbox next to a recipe or pantry item deletes it — from the page and from the database, permanently. Closes out full create/read/delete for both lists (locked into the MVP's "Pantry — add/remove ingredients" from the start; recipe deletion is the same pattern, added alongside it).
+**Concepts:** route-parameters, sql-delete
+
+- [x] Write a `DELETE` SQL statement by hand in `psql` to remove one row by its `id`, and confirm it's gone
+- [x] Add a `DELETE /recipes/:id` route in `server.js` using a route parameter, and test it directly (no UI yet) before touching the frontend
+- [ ] Repeat the pattern for `/pantry/:id`, from memory
+- [ ] Give each rendered list item a clickable checkbox that sends a `DELETE` request to the right route when clicked
+- [ ] Remove the item from the page immediately on a successful delete, and confirm the deletion survives a refresh
+
+### 8. The core feature  [ ] not started
 **Deliverable:** The app shows which saved recipes you can make right now from your pantry, and builds a shopping list of missing ingredients for a chosen recipe.
 **Concepts:** relational-joins, many-to-many-relationships, backend-business-logic
 
-### 8. Tests and safety rails  [ ] not started
+### 9. Editing recipes  [ ] not started
+**Deliverable:** A pencil/edit icon on each recipe lets you correct it (its name, and its ingredient list once Section 8 adds one) without deleting and re-adding the whole thing.
+**Concepts:** sql-update
+
+**Note (locked 2026-08-11):** scoped to recipes only, not pantry. Reasoning: pantry items are expected to become a search/select-based input in a later iteration (picking from a known ingredient list rather than typing free text), at which point there's nothing to "get wrong" — a bad pantry entry just gets deleted and reselected, not corrected in place. Revisit this if pantry input ends up staying free-text.
+
+### 10. Tests and safety rails  [ ] not started
 **Deliverable:** Automated tests checking the matching logic works correctly, plus basic input validation (e.g. can't add an empty recipe).
 **Concepts:** automated-testing, input-validation, error-handling
 
-### 9. Going live  [ ] not started
+### 11. Going live  [ ] not started
 **Deliverable:** The app is deployed on Render with a live database, reachable from your phone at a real URL.
 **Concepts:** deployment-workflow, production-env-vars, git-push-to-deploy
 
-### 10. Finishing the MVP loop  [ ] not started
+### 12. Finishing the MVP loop  [ ] not started
 **Deliverable:** All four MVP features (recipe box, pantry, matching, shopping list) work end-to-end on the live app, polished enough to actually use for real grocery shopping.
 **Concepts:** end-to-end-review, bug-fixing, ui-polish
