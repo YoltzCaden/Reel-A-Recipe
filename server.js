@@ -31,6 +31,12 @@ app.post("/recipes", async function (request, response) {
     response.sendStatus(201);
 });
 
+app.delete("/recipes/:id", async function (request, response) {
+    const id = request.params.id;
+    const result = await pool.query("DELETE FROM recipes WHERE id = $1", [id]);
+    response.sendStatus(200);
+});
+
 app.get("/pantry", async function(request, response) {
     const result = await pool.query("SELECT * FROM pantry;");
     response.json(result.rows);
